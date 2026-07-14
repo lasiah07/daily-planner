@@ -1,11 +1,7 @@
 export const user = {
+  id: 1,
   name: "Lasiah",
   quote: "Organize your day beautifully.",
-};
-
-export const progress = {
-  completed: 3,
-  total: 5,
 };
 
 export const tasks = [

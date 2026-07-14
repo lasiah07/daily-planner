@@ -1,0 +1,19 @@
+.task-header {
+  margin: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-header h2 {
+  font-size: 20px;
+  color: #263238;
+}
+
+.task-header button {
+  border: none;
+  background: none;
+  color: #59B5F8;
+  font-weight: 700;
+  cursor: pointer;
+}

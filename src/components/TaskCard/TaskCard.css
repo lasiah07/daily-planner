@@ -1,0 +1,44 @@
+.task-card {
+  background: white;
+  margin: 14px 24px;
+  padding: 18px 20px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, .05);
+  transition: .3s;
+}
+
+.task-card:hover {
+  transform: translateY(-2px);
+}
+
+.task-check {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.checked {
+  font-size: 28px;
+  color: #59B5F8;
+}
+
+.unchecked {
+  font-size: 28px;
+  color: #C7D7E6;
+}
+
+.task-card span {
+  font-size: 16px;
+  color: #263238;
+  font-weight: 600;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: #9AA8B5;
+}
