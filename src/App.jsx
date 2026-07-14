@@ -1,11 +1,7 @@
-import BottomNavigation from "./components/BottomNavigation/BottomNavigation";
+import Home from "./pages/Home/Home";
 
 function App() {
-  return (
-    <>
-      <BottomNavigation />
-    </>
-  );
+  return <Home />;
 }
 
 export default App;
