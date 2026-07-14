@@ -41,16 +41,18 @@ function Home() {
     );
   };
 
-  const addTask = (title) => {
-    const newTask = {
-      id: Date.now(),
-      title,
-      completed: false,
-    };
-
-    setTaskList([...taskList, newTask]);
+const addTask = ({ title, category, priority }) => {
+  const newTask = {
+    id: Date.now(),
+    title,
+    category,
+    priority,
+    completed: false,
+    createdAt: new Date().toISOString(),
   };
 
+  setTaskList([...taskList, newTask]);
+};
   const completedTasks = taskList.filter(
     (task) => task.completed
   ).length;

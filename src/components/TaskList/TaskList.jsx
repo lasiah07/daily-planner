@@ -17,9 +17,12 @@ function TaskList({ tasks, onToggle }) {
           key={task.id}
           id={task.id}
           title={task.title}
+          category={task.category}
+          priority={task.priority}
           completed={task.completed}
           onToggle={onToggle}
         />
+        
       ))}
     </section>
   );

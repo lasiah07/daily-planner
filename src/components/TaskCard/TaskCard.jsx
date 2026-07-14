@@ -7,6 +7,8 @@ import {
 function TaskCard({
   id,
   title,
+  category,
+  priority,
   completed,
   onToggle,
 }) {
@@ -23,9 +25,21 @@ function TaskCard({
         )}
       </button>
 
-      <span className={completed ? "completed" : ""}>
-        {title}
-      </span>
+      <div className="task-content">
+        <span className={completed ? "completed" : ""}>
+          {title}
+        </span>
+
+        <div className="task-info">
+          <span className="category-badge">
+            📚 {category || "Belajar"}
+          </span>
+
+          <span className={`priority-badge ${priority?.toLowerCase()}`}>
+            {priority || "Low"}
+          </span>
+        </div>
+      </div>
     </div>
   );
 }

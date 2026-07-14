@@ -42,3 +42,49 @@
   text-decoration: line-through;
   color: #9AA8B5;
 }
+
+.task-content{
+  flex:1;
+}
+
+.task-info{
+  display:flex;
+  gap:8px;
+  margin-top:8px;
+  flex-wrap:wrap;
+}
+
+.category-badge{
+  background:#e3f2fd;
+  color:#1976d2;
+
+  padding:4px 10px;
+
+  border-radius:999px;
+
+  font-size:12px;
+  font-weight:600;
+}
+
+.priority-badge{
+  padding:4px 10px;
+
+  border-radius:999px;
+
+  font-size:12px;
+  font-weight:600;
+
+  color:white;
+}
+
+.priority-badge.low{
+  background:#4caf50;
+}
+
+.priority-badge.medium{
+  background:#ff9800;
+}
+
+.priority-badge.high{
+  background:#f44336;
+}
