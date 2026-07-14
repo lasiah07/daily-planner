@@ -1,0 +1,80 @@
+.modal-overlay{
+    position:fixed;
+    inset:0;
+
+    background:rgba(0,0,0,.35);
+
+    z-index:100;
+}
+
+.modal-container{
+
+    position:fixed;
+
+    left:0;
+    right:0;
+    bottom:0;
+
+    background:white;
+
+    border-radius:28px 28px 0 0;
+
+    padding:24px;
+
+    z-index:101;
+
+    animation:slideUp .25s ease;
+
+    box-shadow:0 -10px 40px rgba(0,0,0,.08);
+}
+
+.modal-header{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.modal-header h2{
+
+    font-size:22px;
+    color:#263238;
+}
+
+.close-button{
+
+    width:42px;
+    height:42px;
+
+    border:none;
+    border-radius:50%;
+
+    background:#F2F6FA;
+
+    cursor:pointer;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:24px;
+}
+
+.coming-soon{
+
+    margin-top:24px;
+    color:#7D8A97;
+}
+
+@keyframes slideUp{
+
+    from{
+
+        transform:translateY(100%);
+    }
+
+    to{
+
+        transform:translateY(0);
+    }
+}
