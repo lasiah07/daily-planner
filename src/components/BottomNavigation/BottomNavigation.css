@@ -1,62 +1,89 @@
-.bottom-nav{
-    position:fixed;
-    bottom:20px;
-    left:50%;
-    transform:translateX(-50%);
+.bottom-nav {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
 
-    width:min(430px,92%);
-    height:78px;
+  width: min(430px, 92%);
+  height: 82px;
 
-    background:#ffffff;
+  background: #ffffff;
 
-    border-radius:30px;
+  border-radius: 28px;
 
-    display:flex;
-    justify-content:space-around;
-    align-items:center;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 
-    box-shadow:0 10px 35px rgba(0,0,0,.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+
+  z-index: 100;
 }
 
-.nav-item{
+.nav-item {
+  border: none;
+  background: none;
 
-    border:none;
-    background:none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:4px;
+  gap: 4px;
 
-    cursor:pointer;
+  color: #95a2b5;
 
-    color:#95A2B5;
+  cursor: pointer;
 
-    transition:.25s;
+  transition: 0.25s;
 }
 
-.nav-item svg{
-
-    font-size:24px;
-
+.nav-item svg {
+  font-size: 23px;
 }
 
-.nav-item span{
-
-    font-size:12px;
-
-    font-weight:700;
-
+.nav-item span {
+  font-size: 11px;
+  font-weight: 600;
 }
 
-.nav-item:hover{
-
-    transform:translateY(-3px);
-
+.nav-item:hover {
+  transform: translateY(-3px);
 }
 
-.active{
+.active {
+  color: #67c6ff;
+}
 
-    color:#67C6FF;
+.add-button {
+  position: absolute;
+  top: -22px;
 
+  width: 62px;
+  height: 62px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: #67c6ff;
+  color: white;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 30px;
+
+  cursor: pointer;
+
+  box-shadow: 0 12px 25px rgba(103, 198, 255, 0.35);
+
+  transition: 0.25s;
+}
+
+.add-button:hover {
+  transform: translateY(-3px) scale(1.05);
+}
+
+.add-button:active {
+  transform: scale(0.95);
 }

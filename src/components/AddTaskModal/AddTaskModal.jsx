@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./AddTaskModal.css";
 import { RiCloseLine } from "react-icons/ri";
 
@@ -6,6 +6,14 @@ function AddTaskModal({ isOpen, onClose, onAddTask }) {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("Belajar");
   const [priority, setPriority] = useState("Low");
+
+  useEffect(() => {
+    if (!isOpen) {
+      setTitle("");
+      setCategory("Belajar");
+      setPriority("Low");
+    }
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -18,22 +26,24 @@ function AddTaskModal({ isOpen, onClose, onAddTask }) {
       priority,
     });
 
-    setTitle("");
-    setCategory("Belajar");
-    setPriority("Low");
-
     onClose();
   };
 
   return (
     <>
-      <div className="modal-overlay" onClick={onClose} />
+      <div
+        className="modal-overlay"
+        onClick={onClose}
+      />
 
       <div className="modal-container">
         <div className="modal-header">
           <h2>Tambah Aktivitas</h2>
 
-          <button className="close-button" onClick={onClose}>
+          <button
+            className="close-button"
+            onClick={onClose}
+          >
             <RiCloseLine />
           </button>
         </div>
@@ -46,6 +56,11 @@ function AddTaskModal({ isOpen, onClose, onAddTask }) {
             placeholder="Contoh: Belajar React"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleSubmit();
+              }
+            }}
           />
         </div>
 
@@ -70,7 +85,9 @@ function AddTaskModal({ isOpen, onClose, onAddTask }) {
           <div className="priority-group">
             <button
               type="button"
-              className={`priority-btn ${priority === "Low" ? "active" : ""}`}
+              className={`priority-btn ${
+                priority === "Low" ? "active" : ""
+              }`}
               onClick={() => setPriority("Low")}
             >
               🟢 Low
@@ -78,7 +95,9 @@ function AddTaskModal({ isOpen, onClose, onAddTask }) {
 
             <button
               type="button"
-              className={`priority-btn ${priority === "Medium" ? "active" : ""}`}
+              className={`priority-btn ${
+                priority === "Medium" ? "active" : ""
+              }`}
               onClick={() => setPriority("Medium")}
             >
               🟡 Medium
@@ -86,7 +105,9 @@ function AddTaskModal({ isOpen, onClose, onAddTask }) {
 
             <button
               type="button"
-              className={`priority-btn ${priority === "High" ? "active" : ""}`}
+              className={`priority-btn ${
+                priority === "High" ? "active" : ""
+              }`}
               onClick={() => setPriority("High")}
             >
               🔴 High
@@ -97,6 +118,7 @@ function AddTaskModal({ isOpen, onClose, onAddTask }) {
         <button
           className="save-button"
           onClick={handleSubmit}
+          disabled={title.trim() === ""}
         >
           Simpan
         </button>

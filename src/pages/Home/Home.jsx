@@ -4,26 +4,25 @@ import "./Home.css";
 import GreetingCard from "../../components/GreetingCard/GreetingCard";
 import ProgressCard from "../../components/ProgressCard/ProgressCard";
 import TaskList from "../../components/TaskList/TaskList";
-import FloatingButton from "../../components/FloatingButton/FloatingButton";
-import AddTaskModal from "../../components/AddTaskModal/AddTaskModal";
 import BottomNavigation from "../../components/BottomNavigation/BottomNavigation";
+import AddTaskModal from "../../components/AddTaskModal/AddTaskModal";
 
 import { user, tasks } from "../../data/dummyData";
 
 function Home() {
-  // Ambil data dari localStorage jika ada
+  // Ambil data dari Local Storage
   const [taskList, setTaskList] = useState(() => {
-    const savedTasks = localStorage.getItem("planora-tasks");
+    const savedTasks = localStorage.getItem("planora_tasks");
 
     return savedTasks ? JSON.parse(savedTasks) : tasks;
   });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Simpan otomatis setiap task berubah
+  // Simpan ke Local Storage setiap task berubah
   useEffect(() => {
     localStorage.setItem(
-      "planora-tasks",
+      "planora_tasks",
       JSON.stringify(taskList)
     );
   }, [taskList]);
@@ -41,18 +40,16 @@ function Home() {
     );
   };
 
-const addTask = ({ title, category, priority }) => {
-  const newTask = {
-    id: Date.now(),
-    title,
-    category,
-    priority,
-    completed: false,
-    createdAt: new Date().toISOString(),
+  const addTask = ({ title }) => {
+    const newTask = {
+      id: Date.now(),
+      title,
+      completed: false,
+    };
+
+    setTaskList([...taskList, newTask]);
   };
 
-  setTaskList([...taskList, newTask]);
-};
   const completedTasks = taskList.filter(
     (task) => task.completed
   ).length;
@@ -76,8 +73,8 @@ const addTask = ({ title, category, priority }) => {
         onToggle={toggleTask}
       />
 
-      <FloatingButton
-        onClick={() => setIsModalOpen(true)}
+      <BottomNavigation
+        onAddClick={() => setIsModalOpen(true)}
       />
 
       <AddTaskModal
@@ -85,8 +82,6 @@ const addTask = ({ title, category, priority }) => {
         onClose={() => setIsModalOpen(false)}
         onAddTask={addTask}
       />
-
-      <BottomNavigation />
     </div>
   );
 }

@@ -1,13 +1,13 @@
 import "./BottomNavigation.css";
 import {
   RiHome5Fill,
-  RiCheckboxCircleFill,
   RiStickyNoteFill,
   RiBarChartFill,
   RiUser3Fill,
+  RiAddLine,
 } from "react-icons/ri";
 
-function BottomNavigation() {
+function BottomNavigation({ onAddClick }) {
   return (
     <nav className="bottom-nav">
 
@@ -17,18 +17,20 @@ function BottomNavigation() {
       </button>
 
       <button className="nav-item">
-        <RiCheckboxCircleFill />
-        <span>Planning</span>
-      </button>
-
-      <button className="nav-item">
         <RiStickyNoteFill />
         <span>Notes</span>
       </button>
 
+      <button
+        className="add-button"
+        onClick={onAddClick}
+      >
+        <RiAddLine />
+      </button>
+
       <button className="nav-item">
         <RiBarChartFill />
-        <span>Tracking</span>
+        <span>Insights</span>
       </button>
 
       <button className="nav-item">
