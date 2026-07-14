@@ -1,8 +1,21 @@
+import { useState } from "react";
 import "./AddTaskModal.css";
 import { RiCloseLine } from "react-icons/ri";
 
-function AddTaskModal({ isOpen, onClose }) {
+function AddTaskModal({ isOpen, onClose, onAddTask }) {
+  const [title, setTitle] = useState("");
+
   if (!isOpen) return null;
+
+  const handleSubmit = () => {
+    if (title.trim() === "") return;
+
+    onAddTask(title);
+
+    setTitle("");
+
+    onClose();
+  };
 
   return (
     <>
@@ -23,9 +36,23 @@ function AddTaskModal({ isOpen, onClose }) {
           </button>
         </div>
 
-        <p className="coming-soon">
-          Form akan kita buat pada langkah berikutnya.
-        </p>
+        <div className="form-group">
+          <label>Judul Aktivitas</label>
+
+          <input
+            type="text"
+            placeholder="Contoh: Belajar React"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
+
+        <button
+          className="save-button"
+          onClick={handleSubmit}
+        >
+          Simpan
+        </button>
       </div>
     </>
   );

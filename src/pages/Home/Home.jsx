@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Home.css";
 
 import GreetingCard from "../../components/GreetingCard/GreetingCard";
@@ -11,18 +11,44 @@ import BottomNavigation from "../../components/BottomNavigation/BottomNavigation
 import { user, tasks } from "../../data/dummyData";
 
 function Home() {
-  const [taskList, setTaskList] = useState(tasks);
+  // Ambil data dari localStorage jika ada
+  const [taskList, setTaskList] = useState(() => {
+    const savedTasks = localStorage.getItem("planora-tasks");
+
+    return savedTasks ? JSON.parse(savedTasks) : tasks;
+  });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Simpan otomatis setiap task berubah
+  useEffect(() => {
+    localStorage.setItem(
+      "planora-tasks",
+      JSON.stringify(taskList)
+    );
+  }, [taskList]);
 
   const toggleTask = (id) => {
     setTaskList(
       taskList.map((task) =>
         task.id === id
-          ? { ...task, completed: !task.completed }
+          ? {
+              ...task,
+              completed: !task.completed,
+            }
           : task
       )
     );
+  };
+
+  const addTask = (title) => {
+    const newTask = {
+      id: Date.now(),
+      title,
+      completed: false,
+    };
+
+    setTaskList([...taskList, newTask]);
   };
 
   const completedTasks = taskList.filter(
@@ -55,6 +81,7 @@ function Home() {
       <AddTaskModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
+        onAddTask={addTask}
       />
 
       <BottomNavigation />
