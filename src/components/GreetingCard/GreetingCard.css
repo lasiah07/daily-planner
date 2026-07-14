@@ -1,0 +1,55 @@
+.greeting-card{
+
+    margin:24px;
+
+    padding:28px;
+
+    border-radius:28px;
+
+    background:linear-gradient(
+        135deg,
+        #7CCBFF,
+        #DDF3FF
+    );
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
+
+}
+
+.greeting-text h4{
+
+    color:white;
+
+    font-size:18px;
+
+}
+
+.greeting-text h1{
+
+    color:white;
+
+    font-size:38px;
+
+    margin-top:6px;
+
+}
+
+.greeting-text p{
+
+    color:white;
+
+    margin-top:12px;
+
+}
+
+.sun{
+
+    font-size:70px;
+
+}

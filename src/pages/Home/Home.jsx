@@ -1,13 +1,27 @@
 import "./Home.css";
 
-import Header from "../../components/Header/Header";
+import GreetingCard from "../../components/GreetingCard/GreetingCard";
+import ProgressCard from "../../components/ProgressCard/ProgressCard";
 import BottomNavigation from "../../components/BottomNavigation/BottomNavigation";
+
+import { user, progress } from "../../data/dummyData";
 
 function Home() {
   return (
     <div className="home">
-      <Header />
+
+      <GreetingCard
+        name={user.name}
+        quote={user.quote}
+      />
+
+      <ProgressCard
+        completed={progress.completed}
+        total={progress.total}
+      />
+
       <BottomNavigation />
+
     </div>
   );
 }
