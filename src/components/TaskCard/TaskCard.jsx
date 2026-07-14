@@ -1,10 +1,21 @@
 import "./TaskCard.css";
-import { RiCheckboxCircleFill, RiCheckboxBlankCircleLine } from "react-icons/ri";
+import {
+  RiCheckboxCircleFill,
+  RiCheckboxBlankCircleLine,
+} from "react-icons/ri";
 
-function TaskCard({ title, completed }) {
+function TaskCard({
+  id,
+  title,
+  completed,
+  onToggle,
+}) {
   return (
     <div className="task-card">
-      <button className="task-check">
+      <button
+        className="task-check"
+        onClick={() => onToggle(id)}
+      >
         {completed ? (
           <RiCheckboxCircleFill className="checked" />
         ) : (
