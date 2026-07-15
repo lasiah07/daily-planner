@@ -4,6 +4,7 @@ import "./Notes.css";
 import {
   RiSearchLine,
   RiAddLine,
+  RiArrowLeftLine,
 } from "react-icons/ri";
 
 import EmptyState from "../../components/EmptyState/EmptyState";
@@ -18,12 +19,17 @@ function Notes() {
   });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const [editingNote, setEditingNote] = useState(null);
 
   const [selectedNote, setSelectedNote] = useState(null);
-
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+
+  const [isSearching, setIsSearching] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // FILTER KATEGORI
+  const [selectedCategory, setSelectedCategory] =
+    useState("Semua");
 
   useEffect(() => {
     localStorage.setItem(
@@ -32,7 +38,11 @@ function Notes() {
     );
   }, [notes]);
 
-  const saveNote = ({ title, content }) => {
+  const saveNote = ({
+    title,
+    content,
+    category,
+  }) => {
     if (editingNote) {
       setNotes(
         notes.map((note) =>
@@ -41,6 +51,7 @@ function Notes() {
                 ...note,
                 title,
                 content,
+                category,
               }
             : note
         )
@@ -50,6 +61,8 @@ function Notes() {
         id: Date.now(),
         title,
         content,
+        category,
+        pinned: false,
         date: new Date().toLocaleDateString(
           "id-ID",
           {
@@ -88,40 +101,157 @@ function Notes() {
     setIsDeleteOpen(false);
   };
 
+  const togglePin = (id) => {
+    setNotes(
+      notes.map((note) =>
+        note.id === id
+          ? {
+              ...note,
+              pinned: !note.pinned,
+            }
+          : note
+      )
+    );
+  };
+
+  const filteredNotes = notes
+    .filter((note) => {
+      const keyword =
+        searchQuery.toLowerCase();
+
+      const matchSearch =
+        note.title
+          .toLowerCase()
+          .includes(keyword) ||
+        note.content
+          .toLowerCase()
+          .includes(keyword);
+
+      const matchCategory =
+        selectedCategory === "Semua" ||
+        note.category === selectedCategory;
+
+      return matchSearch && matchCategory;
+    })
+    .sort(
+      (a, b) =>
+        Number(b.pinned) -
+        Number(a.pinned)
+    );
+
   return (
     <div className="notes-page">
+
       <header className="notes-header">
-        <h1>Notes</h1>
+              {!isSearching ? (
+          <>
+            <h1>Notes</h1>
 
-        <div className="header-actions">
-          <button className="header-btn">
-            <RiSearchLine />
-          </button>
+            <div className="header-actions">
+              <button
+                className="header-btn"
+                onClick={() =>
+                  setIsSearching(true)
+                }
+              >
+                <RiSearchLine />
+              </button>
 
-          <button
-            className="header-btn"
-            onClick={() => {
-              setEditingNote(null);
-              setIsModalOpen(true);
-            }}
-          >
-            <RiAddLine />
-          </button>
-        </div>
+              <button
+                className="header-btn"
+                onClick={() => {
+                  setEditingNote(null);
+                  setIsModalOpen(true);
+                }}
+              >
+                <RiAddLine />
+              </button>
+            </div>
+          </>
+        ) : (
+          <div className="search-header">
+            <button
+              className="back-btn"
+              onClick={() => {
+                setIsSearching(false);
+                setSearchQuery("");
+              }}
+            >
+              <RiArrowLeftLine />
+            </button>
+
+            <input
+              type="text"
+              placeholder="Search notes..."
+              value={searchQuery}
+              onChange={(e) =>
+                setSearchQuery(
+                  e.target.value
+                )
+              }
+              autoFocus
+            />
+          </div>
+        )}
       </header>
+
+      {notes.length > 0 && (
+        <div className="category-filter">
+
+          {[
+            "Semua",
+            "Belajar",
+            "Kerja",
+            "Personal",
+            "Ide",
+            "Ibadah",
+          ].map((category) => (
+            <button
+              key={category}
+              className={`category-chip ${
+                selectedCategory ===
+                category
+                  ? "active"
+                  : ""
+              }`}
+              onClick={() =>
+                setSelectedCategory(
+                  category
+                )
+              }
+            >
+              {category}
+            </button>
+          ))}
+
+        </div>
+      )}
 
       {notes.length === 0 ? (
         <EmptyState />
       ) : (
         <div className="notes-list">
-          {notes.map((note) => (
-            <NoteCard
-              key={note.id}
-              note={note}
-              onEdit={handleEdit}
-              onDelete={handleDelete}
-            />
-          ))}
+
+          {filteredNotes.length === 0 ? (
+            <p className="empty-search">
+              Tidak ada catatan ditemukan.
+            </p>
+          ) : (
+            filteredNotes.map((note) => (
+              <NoteCard
+                key={note.id}
+                note={note}
+                onEdit={handleEdit}
+                onDelete={
+                  handleDelete
+                }
+                onTogglePin={
+                  togglePin
+                }
+              />
+            ))
+          )}
+
         </div>
       )}
 

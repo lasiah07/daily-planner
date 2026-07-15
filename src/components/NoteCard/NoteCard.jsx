@@ -1,25 +1,68 @@
 import "./NoteCard.css";
 import NoteMenu from "../NoteMenu/NoteMenu";
+import { RiPushpin2Fill } from "react-icons/ri";
 
 function NoteCard({
   note,
   onEdit,
   onDelete,
+  onTogglePin,
 }) {
   return (
-    <div className="note-card">
+    <div
+      className={`note-card ${
+        note.pinned ? "pinned-card" : ""
+      }`}
+    >
       <div className="note-top">
-        <h3>{note.title}</h3>
 
-        <NoteMenu
-          onEdit={() => onEdit(note)}
-          onDelete={() => onDelete(note.id)}
-        />
+        <div className="note-header">
+
+          <div className="note-badges">
+
+            <span
+              className={`category-badge category-${(
+                note.category || "Belajar"
+              ).toLowerCase()}`}
+            >
+              {note.category || "Belajar"}
+            </span>
+
+          </div>
+
+          <h3>{note.title}</h3>
+
+        </div>
+
+        <div className="note-actions">
+
+          {note.pinned && (
+            <span className="pin-badge">
+              <RiPushpin2Fill />
+            </span>
+          )}
+
+          <NoteMenu
+            pinned={note.pinned}
+            onPin={() =>
+              onTogglePin(note.id)
+            }
+            onEdit={() =>
+              onEdit(note)
+            }
+            onDelete={() =>
+              onDelete(note.id)
+            }
+          />
+
+        </div>
+
       </div>
 
       <p>{note.content}</p>
 
       <span>{note.date}</span>
+
     </div>
   );
 }

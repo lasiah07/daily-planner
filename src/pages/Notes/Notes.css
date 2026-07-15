@@ -89,3 +89,60 @@
     gap:16px;
 
 }
+
+.search-header{
+
+    display:flex;
+    align-items:center;
+    gap:12px;
+    width:100%;
+
+}
+
+.back-btn{
+
+    border:none;
+    background:none;
+    cursor:pointer;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+}
+
+.back-btn svg{
+
+    font-size:24px;
+    color:#24324B;
+
+}
+
+.search-header input{
+
+    flex:1;
+
+    border:none;
+    outline:none;
+
+    background:#F5F8FC;
+
+    padding:12px 16px;
+
+    border-radius:14px;
+
+    font-size:15px;
+
+}
+
+.empty-search{
+
+    margin-top:80px;
+
+    text-align:center;
+
+    color:#9AA5B1;
+
+    font-size:15px;
+
+}

@@ -10,6 +10,8 @@ function AddNoteModal({
 }) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [category, setCategory] =
+    useState("Belajar");
 
   useEffect(() => {
     if (!isOpen) return;
@@ -17,9 +19,13 @@ function AddNoteModal({
     if (editNote) {
       setTitle(editNote.title);
       setContent(editNote.content);
+      setCategory(
+        editNote.category || "Belajar"
+      );
     } else {
       setTitle("");
       setContent("");
+      setCategory("Belajar");
     }
   }, [editNote, isOpen]);
 
@@ -36,6 +42,7 @@ function AddNoteModal({
     onSave({
       title: title.trim(),
       content: content.trim(),
+      category,
     });
 
     onClose();
@@ -88,6 +95,37 @@ function AddNoteModal({
               setContent(e.target.value)
             }
           />
+        </div>
+
+        <div className="form-group">
+          <label>Kategori</label>
+
+          <select
+            value={category}
+            onChange={(e) =>
+              setCategory(e.target.value)
+            }
+          >
+            <option value="Belajar">
+              📚 Belajar
+            </option>
+
+            <option value="Kerja">
+              💼 Kerja
+            </option>
+
+            <option value="Personal">
+              🏠 Personal
+            </option>
+
+            <option value="Ide">
+              💡 Ide
+            </option>
+
+            <option value="Ibadah">
+              🕌 Ibadah
+            </option>
+          </select>
         </div>
 
         <button

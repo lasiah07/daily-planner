@@ -1,13 +1,22 @@
 import { useState, useEffect, useRef } from "react";
 import "./NoteMenu.css";
+
 import {
   RiMore2Fill,
   RiEdit2Line,
   RiDeleteBin6Line,
+  RiPushpin2Line,
+  RiUnpinLine,
 } from "react-icons/ri";
 
-function NoteMenu({ onEdit, onDelete }) {
+function NoteMenu({
+  pinned,
+  onPin,
+  onEdit,
+  onDelete,
+}) {
   const [open, setOpen] = useState(false);
+
   const menuRef = useRef(null);
 
   useEffect(() => {
@@ -46,6 +55,24 @@ function NoteMenu({ onEdit, onDelete }) {
 
       {open && (
         <div className="dropdown-menu">
+
+          <button
+            onClick={() => {
+              onPin();
+              setOpen(false);
+            }}
+          >
+            {pinned ? (
+              <RiUnpinLine />
+            ) : (
+              <RiPushpin2Line />
+            )}
+
+            {pinned
+              ? "Lepas Pin"
+              : "Pin Catatan"}
+          </button>
+
           <button
             onClick={() => {
               onEdit();
@@ -66,6 +93,7 @@ function NoteMenu({ onEdit, onDelete }) {
             <RiDeleteBin6Line />
             Hapus
           </button>
+
         </div>
       )}
     </div>
