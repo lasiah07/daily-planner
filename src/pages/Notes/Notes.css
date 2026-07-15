@@ -1,0 +1,91 @@
+.notes-page{
+
+    max-width:430px;
+
+    margin:auto;
+
+    min-height:100vh;
+
+    padding:28px 22px 110px;
+
+    background:#F8FBFD;
+
+}
+
+.notes-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:28px;
+
+}
+
+.notes-header h1{
+
+    font-size:32px;
+
+    color:#24324B;
+
+}
+
+.header-actions{
+
+    display:flex;
+
+    gap:10px;
+
+}
+
+.header-btn{
+
+    width:42px;
+
+    height:42px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:white;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    cursor:pointer;
+
+    box-shadow:0 4px 14px rgba(0,0,0,.08);
+
+    transition:.2s;
+
+}
+
+.header-btn:hover{
+
+    transform:translateY(-2px);
+
+}
+
+.header-btn svg{
+
+    font-size:22px;
+
+    color:#67C6FF;
+
+}
+
+.notes-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:16px;
+
+}

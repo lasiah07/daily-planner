@@ -1,0 +1,71 @@
+.note-card{
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:18px;
+
+    margin-bottom:16px;
+
+    box-shadow:0 4px 18px rgba(0,0,0,.08);
+
+}
+
+.note-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    margin-bottom:12px;
+
+}
+
+.note-top h3{
+
+    color:#24324B;
+
+    font-size:18px;
+
+}
+
+.note-top button{
+
+    border:none;
+
+    background:none;
+
+    cursor:pointer;
+
+}
+
+.note-top svg{
+
+    font-size:22px;
+
+    color:#95A2B5;
+
+}
+
+.note-card p{
+
+    color:#5B6575;
+
+    line-height:1.6;
+
+    margin-bottom:18px;
+
+    white-space:pre-wrap;
+
+}
+
+.note-card span{
+
+    color:#A0AEC0;
+
+    font-size:13px;
+
+}
