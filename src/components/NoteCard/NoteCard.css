@@ -1,30 +1,28 @@
 .note-card{
 
-    background:#FFFFFF;
-
-    border-radius:18px;
+    border-radius:20px;
 
     padding:18px;
 
-    box-shadow:0 4px 16px rgba(0,0,0,.06);
-
-    margin-bottom:18px;
+    box-shadow:0 6px 18px rgba(0,0,0,.06);
 
     transition:.25s;
+
+    margin-bottom:18px;
 
 }
 
 .note-card:hover{
 
-    transform:translateY(-2px);
+    transform:translateY(-3px);
+
+    box-shadow:0 10px 24px rgba(0,0,0,.08);
 
 }
 
 .pinned-card{
 
-    border:2px solid #FFE08A;
-
-    background:#FFFDF7;
+    border:2px solid #FFD86B;
 
 }
 
@@ -72,7 +70,7 @@
 
 .category-belajar{
 
-    background:#EAF4FF;
+    background:#DCEEFF;
 
     color:#2563EB;
 
@@ -80,7 +78,7 @@
 
 .category-kerja{
 
-    background:#FFF1E8;
+    background:#FFE8D6;
 
     color:#EA580C;
 
@@ -88,9 +86,9 @@
 
 .category-personal{
 
-    background:#ECFDF3;
+    background:#DCFCE7;
 
-    color:#16A34A;
+    color:#15803D;
 
 }
 
@@ -104,7 +102,7 @@
 
 .category-ibadah{
 
-    background:#E6FFFB;
+    background:#CCFBF1;
 
     color:#0F766E;
 
@@ -112,11 +110,11 @@
 
 .note-header h3{
 
-    font-size:19px;
-
-    color:#1F2937;
-
     margin:0;
+
+    color:#24324B;
+
+    font-size:20px;
 
 }
 
@@ -140,34 +138,32 @@
 
     display:flex;
 
-    align-items:center;
-
     justify-content:center;
 
-    background:#FFF6D6;
+    align-items:center;
 
-    color:#F59E0B;
+    background:#FFF3C4;
 
-    font-size:15px;
+    color:#EAB308;
 
 }
 
 .note-card p{
 
+    margin:14px 0 18px;
+
     color:#4B5563;
 
-    line-height:1.6;
-
-    margin-bottom:18px;
+    line-height:1.7;
 
     white-space:pre-wrap;
 
 }
 
-.note-card span:last-child{
+.note-date{
 
     font-size:13px;
 
-    color:#98A2B3;
+    color:#6B7280;
 
 }

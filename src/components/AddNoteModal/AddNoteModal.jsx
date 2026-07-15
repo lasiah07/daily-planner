@@ -12,6 +12,7 @@ function AddNoteModal({
   const [content, setContent] = useState("");
   const [category, setCategory] =
     useState("Belajar");
+  const [color, setColor] = useState("#ffffff");
 
   useEffect(() => {
     if (!isOpen) return;
@@ -22,10 +23,12 @@ function AddNoteModal({
       setCategory(
         editNote.category || "Belajar"
       );
+      setColor(editNote.color || "#ffffff");
     } else {
       setTitle("");
       setContent("");
       setCategory("Belajar");
+      setColor("#ffffff");
     }
   }, [editNote, isOpen]);
 
@@ -43,6 +46,7 @@ function AddNoteModal({
       title: title.trim(),
       content: content.trim(),
       category,
+      color,
     });
 
     onClose();
@@ -126,6 +130,58 @@ function AddNoteModal({
               🕌 Ibadah
             </option>
           </select>
+        </div>
+
+        <div className="form-group">
+
+          <label>Warna Catatan</label>
+
+          <div className="color-picker">
+
+            <button
+              type="button"
+              className={`color-dot ${color === "#FFFFFF" ? "active" : ""}`}
+              style={{ background: "#FFFFFF" }}
+              onClick={() => setColor("#FFFFFF")}
+            />
+
+            <button
+              type="button"
+              className={`color-dot ${color === "#EAF4FF" ? "active" : ""}`}
+              style={{ background: "#EAF4FF" }}
+              onClick={() => setColor("#EAF4FF")}
+            />
+
+            <button
+              type="button"
+              className={`color-dot ${color === "#ECFDF3" ? "active" : ""}`}
+              style={{ background: "#ECFDF3" }}
+              onClick={() => setColor("#ECFDF3")}
+            />
+
+            <button
+              type="button"
+              className={`color-dot ${color === "#FFF8DB" ? "active" : ""}`}
+              style={{ background: "#FFF8DB" }}
+              onClick={() => setColor("#FFF8DB")}
+            />
+
+            <button
+              type="button"
+              className={`color-dot ${color === "#F3E8FF" ? "active" : ""}`}
+              style={{ background: "#F3E8FF" }}
+              onClick={() => setColor("#F3E8FF")}
+            />
+
+            <button
+              type="button"
+              className={`color-dot ${color === "#FFE8F1" ? "active" : ""}`}
+              style={{ background: "#FFE8F1" }}
+              onClick={() => setColor("#FFE8F1")}
+            />
+
+            </div>
+
         </div>
 
         <button

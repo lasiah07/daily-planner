@@ -13,13 +13,14 @@ function NoteCard({
       className={`note-card ${
         note.pinned ? "pinned-card" : ""
       }`}
+      style={{
+        backgroundColor:
+          note.color || "#FFFFFF",
+      }}
     >
       <div className="note-top">
-
         <div className="note-header">
-
           <div className="note-badges">
-
             <span
               className={`category-badge category-${(
                 note.category || "Belajar"
@@ -27,15 +28,12 @@ function NoteCard({
             >
               {note.category || "Belajar"}
             </span>
-
           </div>
 
           <h3>{note.title}</h3>
-
         </div>
 
         <div className="note-actions">
-
           {note.pinned && (
             <span className="pin-badge">
               <RiPushpin2Fill />
@@ -54,15 +52,14 @@ function NoteCard({
               onDelete(note.id)
             }
           />
-
         </div>
-
       </div>
 
       <p>{note.content}</p>
 
-      <span>{note.date}</span>
-
+      <span className="note-date">
+        {note.date}
+      </span>
     </div>
   );
 }

@@ -43,3 +43,45 @@ textarea:focus{
     margin-top:8px;
 
 }
+
+.color-picker{
+
+    display:flex;
+
+    gap:12px;
+
+    margin-top:10px;
+
+    flex-wrap:wrap;
+
+}
+
+.color-dot{
+
+    width:34px;
+
+    height:34px;
+
+    border-radius:50%;
+
+    border:2px solid #E5E7EB;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+.color-dot:hover{
+
+    transform:scale(1.08);
+
+}
+
+.color-dot.active{
+
+    border:3px solid #67C6FF;
+
+    transform:scale(1.1);
+
+}

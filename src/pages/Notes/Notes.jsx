@@ -27,7 +27,6 @@ function Notes() {
   const [isSearching, setIsSearching] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
-  // FILTER KATEGORI
   const [selectedCategory, setSelectedCategory] =
     useState("Semua");
 
@@ -42,6 +41,7 @@ function Notes() {
     title,
     content,
     category,
+    color,
   }) => {
     if (editingNote) {
       setNotes(
@@ -52,6 +52,7 @@ function Notes() {
                 title,
                 content,
                 category,
+                color,
               }
             : note
         )
@@ -62,6 +63,7 @@ function Notes() {
         title,
         content,
         category,
+        color,
         pinned: false,
         date: new Date().toLocaleDateString(
           "id-ID",
@@ -143,16 +145,14 @@ function Notes() {
     <div className="notes-page">
 
       <header className="notes-header">
-              {!isSearching ? (
+                {!isSearching ? (
           <>
             <h1>Notes</h1>
 
             <div className="header-actions">
               <button
                 className="header-btn"
-                onClick={() =>
-                  setIsSearching(true)
-                }
+                onClick={() => setIsSearching(true)}
               >
                 <RiSearchLine />
               </button>
@@ -185,9 +185,7 @@ function Notes() {
               placeholder="Search notes..."
               value={searchQuery}
               onChange={(e) =>
-                setSearchQuery(
-                  e.target.value
-                )
+                setSearchQuery(e.target.value)
               }
               autoFocus
             />
@@ -197,7 +195,6 @@ function Notes() {
 
       {notes.length > 0 && (
         <div className="category-filter">
-
           {[
             "Semua",
             "Belajar",
@@ -209,21 +206,17 @@ function Notes() {
             <button
               key={category}
               className={`category-chip ${
-                selectedCategory ===
-                category
+                selectedCategory === category
                   ? "active"
                   : ""
               }`}
               onClick={() =>
-                setSelectedCategory(
-                  category
-                )
+                setSelectedCategory(category)
               }
             >
               {category}
             </button>
           ))}
-
         </div>
       )}
 
@@ -231,7 +224,6 @@ function Notes() {
         <EmptyState />
       ) : (
         <div className="notes-list">
-
           {filteredNotes.length === 0 ? (
             <p className="empty-search">
               Tidak ada catatan ditemukan.
@@ -242,16 +234,11 @@ function Notes() {
                 key={note.id}
                 note={note}
                 onEdit={handleEdit}
-                onDelete={
-                  handleDelete
-                }
-                onTogglePin={
-                  togglePin
-                }
+                onDelete={handleDelete}
+                onTogglePin={togglePin}
               />
             ))
           )}
-
         </div>
       )}
 
