@@ -5,10 +5,10 @@ import GreetingCard from "../../components/GreetingCard/GreetingCard";
 import ProgressCard from "../../components/ProgressCard/ProgressCard";
 import TaskList from "../../components/TaskList/TaskList";
 import DeadlineList from "../../components/DeadlineList/DeadlineList";
-import BottomNavigation from "../../components/BottomNavigation/BottomNavigation";
 import AddTaskModal from "../../components/AddTaskModal/AddTaskModal";
 import AccordionSection from "../../components/AccordionSection/AccordionSection";
 import ConfirmModal from "../../components/ConfirmModal/ConfirmModal";
+import FloatingButton from "../../components/FloatingButton/FloatingButton";
 
 import { user, tasks } from "../../data/dummyData";
 
@@ -148,13 +148,6 @@ function Home() {
         />
       </AccordionSection>
 
-      <BottomNavigation
-        onAddClick={() => {
-          setEditingTask(null);
-          setIsModalOpen(true);
-        }}
-      />
-
       <AddTaskModal
         isOpen={isModalOpen}
         onClose={() => {
@@ -175,6 +168,14 @@ function Home() {
         }}
         onConfirm={confirmDelete}
       />
+
+      <FloatingButton
+        onClick={() => {
+          setEditingTask(null);
+          setIsModalOpen(true);
+        }}
+      />
+
     </div>
   );
 }

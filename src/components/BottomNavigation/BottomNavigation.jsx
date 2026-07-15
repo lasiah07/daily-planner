@@ -1,43 +1,55 @@
 import "./BottomNavigation.css";
+import { NavLink } from "react-router-dom";
+
 import {
   RiHome5Fill,
+  RiCalendar2Fill,
   RiStickyNoteFill,
-  RiBarChartFill,
   RiUser3Fill,
-  RiAddLine,
 } from "react-icons/ri";
 
-function BottomNavigation({ onAddClick }) {
+function BottomNavigation() {
   return (
     <nav className="bottom-nav">
-
-      <button className="nav-item active">
+      <NavLink
+        to="/home"
+        className={({ isActive }) =>
+          `nav-item ${isActive ? "active" : ""}`
+        }
+      >
         <RiHome5Fill />
         <span>Home</span>
-      </button>
+      </NavLink>
 
-      <button className="nav-item">
+      <NavLink
+        to="/calendar"
+        className={({ isActive }) =>
+          `nav-item ${isActive ? "active" : ""}`
+        }
+      >
+        <RiCalendar2Fill />
+        <span>Calendar</span>
+      </NavLink>
+
+      <NavLink
+        to="/notes"
+        className={({ isActive }) =>
+          `nav-item ${isActive ? "active" : ""}`
+        }
+      >
         <RiStickyNoteFill />
         <span>Notes</span>
-      </button>
+      </NavLink>
 
-      <button
-        className="add-button"
-        onClick={onAddClick}
+      <NavLink
+        to="/profile"
+        className={({ isActive }) =>
+          `nav-item ${isActive ? "active" : ""}`
+        }
       >
-        <RiAddLine />
-      </button>
-
-      <button className="nav-item">
-        <RiBarChartFill />
-        <span>Insights</span>
-      </button>
-
-      <button className="nav-item">
         <RiUser3Fill />
         <span>Profile</span>
-      </button>
-
+      </NavLink>
     </nav>
   );
 }

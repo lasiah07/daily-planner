@@ -11,6 +11,7 @@ import EmptyState from "../../components/EmptyState/EmptyState";
 import AddNoteModal from "../../components/AddNoteModal/AddNoteModal";
 import NoteCard from "../../components/NoteCard/NoteCard";
 import ConfirmModal from "../../components/ConfirmModal/ConfirmModal";
+import FloatingButton from "../../components/FloatingButton/FloatingButton";
 
 function Notes() {
   const [notes, setNotes] = useState(() => {
@@ -157,15 +158,6 @@ function Notes() {
                 <RiSearchLine />
               </button>
 
-              <button
-                className="header-btn"
-                onClick={() => {
-                  setEditingNote(null);
-                  setIsModalOpen(true);
-                }}
-              >
-                <RiAddLine />
-              </button>
             </div>
           </>
         ) : (
@@ -262,6 +254,14 @@ function Notes() {
         }}
         onConfirm={confirmDelete}
       />
+
+      <FloatingButton
+        onClick={() => {
+          setEditingNote(null);
+          setIsModalOpen(true);
+        }}
+      />
+
     </div>
   );
 }

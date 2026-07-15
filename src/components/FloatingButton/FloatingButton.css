@@ -1,8 +1,9 @@
 .floating-button{
+
     position:fixed;
 
-    bottom:90px;
     left:50%;
+    bottom:72px;
 
     transform:translateX(-50%);
 
@@ -20,28 +21,35 @@
 
     color:white;
 
-    font-size:34px;
-
     display:flex;
     justify-content:center;
     align-items:center;
 
-    box-shadow:
-    0 12px 30px rgba(92,185,255,.35);
+    font-size:34px;
 
     cursor:pointer;
 
+    box-shadow:
+        0 12px 30px rgba(92,185,255,.30),
+        0 0 18px rgba(92,185,255,.18);
+
     transition:.25s;
+
+    z-index:999;
 }
 
 .floating-button:hover{
+
     transform:
     translateX(-50%)
     scale(1.08);
+
 }
 
 .floating-button:active{
+
     transform:
     translateX(-50%)
-    scale(.92);
+    scale(.95);
+
 }
