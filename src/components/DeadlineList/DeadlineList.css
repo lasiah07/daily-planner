@@ -1,0 +1,23 @@
+.deadline-container{
+    margin-top:30px;
+}
+
+.deadline-container h2{
+
+    font-size:24px;
+
+    color:#24324B;
+
+    margin-bottom:18px;
+
+}
+
+.empty-deadline{
+
+    text-align:center;
+
+    color:#A0AEC0;
+
+    padding:20px;
+
+}

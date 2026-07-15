@@ -1,49 +1,127 @@
-.form-group select{
-  width:100%;
-  padding:14px 16px;
-
-  border:2px solid #dfe8f1;
-  border-radius:14px;
-
-  font-size:16px;
-
-  outline:none;
-
-  background:white;
-
-  box-sizing:border-box;
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .35);
+  z-index: 200;
 }
 
-.priority-group{
+.modal-container {
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
 
-  display:flex;
-  gap:10px;
+  width: min(430px, 100%);
+  background: #fff;
 
-  margin-top:10px;
+  border-radius: 24px 24px 0 0;
+
+  padding: 24px;
+
+  z-index: 201;
+
+  animation: slideUp .25s ease;
 }
 
-.priority-btn{
+@keyframes slideUp {
+  from {
+    transform: translate(-50%,100%);
+  }
 
-  flex:1;
-
-  padding:12px;
-
-  border:none;
-
-  border-radius:12px;
-
-  cursor:pointer;
-
-  background:#edf2f7;
-
-  font-weight:600;
-
-  transition:.25s;
+  to {
+    transform: translate(-50%,0);
+  }
 }
 
-.priority-btn.active{
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-  background:#59b5f8;
+  margin-bottom: 20px;
+}
 
-  color:white;
+.modal-header h2 {
+  font-size: 22px;
+}
+
+.close-button {
+  border: none;
+  background: none;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  font-weight: 600;
+}
+
+.form-group input {
+  padding: 14px;
+
+  border: 1px solid #d9e2ec;
+  border-radius: 14px;
+
+  font-size: 15px;
+}
+
+.deadline-toggle {
+  margin-bottom: 18px;
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.checkbox-row input {
+  width: 18px;
+  height: 18px;
+}
+
+.deadline-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.save-button {
+  width: 100%;
+
+  padding: 14px;
+
+  border: none;
+  border-radius: 14px;
+
+  background: #67c6ff;
+  color: white;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: .2s;
+}
+
+.save-button:hover {
+  transform: translateY(-2px);
+}
+
+.save-button:disabled {
+  background: #b9dff8;
+  cursor: not-allowed;
 }

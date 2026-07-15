@@ -1,17 +1,20 @@
 import { useState, useEffect } from "react";
 import "./AddTaskModal.css";
-import { RiCloseLine } from "react-icons/ri";
+import {
+  RiCloseLine,
+  RiCalendarEventLine,
+} from "react-icons/ri";
 
 function AddTaskModal({ isOpen, onClose, onAddTask }) {
   const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("Belajar");
-  const [priority, setPriority] = useState("Low");
+  const [hasDeadline, setHasDeadline] = useState(false);
+  const [deadline, setDeadline] = useState("");
 
   useEffect(() => {
     if (!isOpen) {
       setTitle("");
-      setCategory("Belajar");
-      setPriority("Low");
+      setHasDeadline(false);
+      setDeadline("");
     }
   }, [isOpen]);
 
@@ -22,8 +25,7 @@ function AddTaskModal({ isOpen, onClose, onAddTask }) {
 
     onAddTask({
       title,
-      category,
-      priority,
+      deadline: hasDeadline ? deadline : null,
     });
 
     onClose();
@@ -64,56 +66,36 @@ function AddTaskModal({ isOpen, onClose, onAddTask }) {
           />
         </div>
 
-        <div className="form-group">
-          <label>Kategori</label>
+        <div className="deadline-toggle">
+          <label className="checkbox-row">
+            <input
+              type="checkbox"
+              checked={hasDeadline}
+              onChange={() =>
+                setHasDeadline(!hasDeadline)
+              }
+            />
 
-          <select
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-          >
-            <option>Belajar</option>
-            <option>Kuliah</option>
-            <option>Personal</option>
-            <option>Ibadah</option>
-            <option>Kesehatan</option>
-          </select>
+            <span>Tambahkan Deadline</span>
+          </label>
         </div>
 
-        <div className="form-group">
-          <label>Prioritas</label>
+        {hasDeadline && (
+          <div className="form-group">
+            <label className="deadline-label">
+              <RiCalendarEventLine />
+              Deadline
+            </label>
 
-          <div className="priority-group">
-            <button
-              type="button"
-              className={`priority-btn ${
-                priority === "Low" ? "active" : ""
-              }`}
-              onClick={() => setPriority("Low")}
-            >
-              🟢 Low
-            </button>
-
-            <button
-              type="button"
-              className={`priority-btn ${
-                priority === "Medium" ? "active" : ""
-              }`}
-              onClick={() => setPriority("Medium")}
-            >
-              🟡 Medium
-            </button>
-
-            <button
-              type="button"
-              className={`priority-btn ${
-                priority === "High" ? "active" : ""
-              }`}
-              onClick={() => setPriority("High")}
-            >
-              🔴 High
-            </button>
+            <input
+              type="date"
+              value={deadline}
+              onChange={(e) =>
+                setDeadline(e.target.value)
+              }
+            />
           </div>
-        </div>
+        )}
 
         <button
           className="save-button"

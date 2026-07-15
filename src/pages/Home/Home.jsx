@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "./Home.css";
 
+import DeadlineList from "../../components/DeadlineList/DeadlineList";
 import GreetingCard from "../../components/GreetingCard/GreetingCard";
 import ProgressCard from "../../components/ProgressCard/ProgressCard";
 import TaskList from "../../components/TaskList/TaskList";
@@ -27,6 +28,7 @@ function Home() {
     );
   }, [taskList]);
 
+  // Checklist
   const toggleTask = (id) => {
     setTaskList(
       taskList.map((task) =>
@@ -40,21 +42,33 @@ function Home() {
     );
   };
 
-  const addTask = ({ title }) => {
+  // Tambah Task
+  const addTask = ({ title, deadline }) => {
     const newTask = {
       id: Date.now(),
       title,
       completed: false,
+      deadline,
     };
 
     setTaskList([...taskList, newTask]);
   };
 
+  // Progress
   const completedTasks = taskList.filter(
     (task) => task.completed
   ).length;
 
   const totalTasks = taskList.length;
+
+  // Hanya tampilkan task tanpa deadline
+  const todayTasks = taskList.filter(
+    (task) => !task.deadline
+  );
+
+  const deadlineTasks = taskList.filter(
+  (task) => task.deadline
+  );
 
   return (
     <div className="home">
@@ -69,7 +83,12 @@ function Home() {
       />
 
       <TaskList
-        tasks={taskList}
+        tasks={todayTasks}
+        onToggle={toggleTask}
+      />
+
+      <DeadlineList
+        tasks={deadlineTasks}
         onToggle={toggleTask}
       />
 

@@ -1,0 +1,70 @@
+.deadline-section {
+  background: #fff;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 18px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.05);
+}
+
+.deadline-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.calendar-icon {
+  font-size: 24px;
+  color: #67C6FF;
+}
+
+.deadline-header h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #24324B;
+}
+
+.deadline-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.deadline-item {
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: #F8FBFF;
+  color: #24324B;
+  font-weight: 600;
+  transition: .2s;
+}
+
+.deadline-item:hover {
+  transform: translateX(4px);
+  background: #EEF8FF;
+}
+
+.deadline-item{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.deadline-check{
+    border:none;
+    background:transparent;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+}
+
+.deadline-title{
+    flex:1;
+    font-size:16px;
+    font-weight:600;
+    color:#24324B;
+}
+
+.deadline-completed{
+    background:#F3FAFF;
+}

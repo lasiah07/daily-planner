@@ -7,13 +7,15 @@ import {
 function TaskCard({
   id,
   title,
-  category,
-  priority,
   completed,
   onToggle,
 }) {
   return (
-    <div className="task-card">
+    <div
+      className={`task-card ${
+        completed ? "completed-card" : ""
+      }`}
+    >
       <button
         className="task-check"
         onClick={() => onToggle(id)}
@@ -25,21 +27,13 @@ function TaskCard({
         )}
       </button>
 
-      <div className="task-content">
-        <span className={completed ? "completed" : ""}>
-          {title}
-        </span>
-
-        <div className="task-info">
-          <span className="category-badge">
-            📚 {category || "Belajar"}
-          </span>
-
-          <span className={`priority-badge ${priority?.toLowerCase()}`}>
-            {priority || "Low"}
-          </span>
-        </div>
-      </div>
+      <span
+        className={`task-title ${
+          completed ? "completed" : ""
+        }`}
+      >
+        {title}
+      </span>
     </div>
   );
 }
