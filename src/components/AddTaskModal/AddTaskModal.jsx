@@ -5,18 +5,29 @@ import {
   RiCalendarEventLine,
 } from "react-icons/ri";
 
-function AddTaskModal({ isOpen, onClose, onAddTask }) {
+function AddTaskModal({
+  isOpen,
+  onClose,
+  onAddTask,
+  editTask,
+}) {
   const [title, setTitle] = useState("");
-  const [hasDeadline, setHasDeadline] = useState(false);
-  const [deadline, setDeadline] = useState("");
+  const [hasDeadline, setHasDeadline] =
+    useState(false);
+  const [deadline, setDeadline] =
+    useState("");
 
   useEffect(() => {
-    if (!isOpen) {
+    if (editTask) {
+      setTitle(editTask.title);
+      setHasDeadline(!!editTask.deadline);
+      setDeadline(editTask.deadline || "");
+    } else {
       setTitle("");
       setHasDeadline(false);
       setDeadline("");
     }
-  }, [isOpen]);
+  }, [editTask, isOpen]);
 
   if (!isOpen) return null;
 
@@ -24,8 +35,11 @@ function AddTaskModal({ isOpen, onClose, onAddTask }) {
     if (title.trim() === "") return;
 
     onAddTask({
+      id: editTask?.id,
       title,
-      deadline: hasDeadline ? deadline : null,
+      deadline: hasDeadline
+        ? deadline
+        : null,
     });
 
     onClose();
@@ -40,7 +54,11 @@ function AddTaskModal({ isOpen, onClose, onAddTask }) {
 
       <div className="modal-container">
         <div className="modal-header">
-          <h2>Tambah Aktivitas</h2>
+          <h2>
+            {editTask
+              ? "Edit Aktivitas"
+              : "Tambah Aktivitas"}
+          </h2>
 
           <button
             className="close-button"
@@ -57,12 +75,9 @@ function AddTaskModal({ isOpen, onClose, onAddTask }) {
             type="text"
             placeholder="Contoh: Belajar React"
             value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                handleSubmit();
-              }
-            }}
+            onChange={(e) =>
+              setTitle(e.target.value)
+            }
           />
         </div>
 
@@ -72,7 +87,9 @@ function AddTaskModal({ isOpen, onClose, onAddTask }) {
               type="checkbox"
               checked={hasDeadline}
               onChange={() =>
-                setHasDeadline(!hasDeadline)
+                setHasDeadline(
+                  !hasDeadline
+                )
               }
             />
 
@@ -91,7 +108,9 @@ function AddTaskModal({ isOpen, onClose, onAddTask }) {
               type="date"
               value={deadline}
               onChange={(e) =>
-                setDeadline(e.target.value)
+                setDeadline(
+                  e.target.value
+                )
               }
             />
           </div>
@@ -100,9 +119,10 @@ function AddTaskModal({ isOpen, onClose, onAddTask }) {
         <button
           className="save-button"
           onClick={handleSubmit}
-          disabled={title.trim() === ""}
         >
-          Simpan
+          {editTask
+            ? "Simpan Perubahan"
+            : "Simpan"}
         </button>
       </div>
     </>

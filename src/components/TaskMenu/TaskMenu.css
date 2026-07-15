@@ -1,0 +1,82 @@
+.task-menu {
+  position: relative;
+}
+
+.menu-button {
+  width: 38px;
+  height: 38px;
+
+  border: none;
+  background: transparent;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 50%;
+
+  cursor: pointer;
+
+  transition: .2s;
+}
+
+.menu-button:hover {
+  background: #F5F7FB;
+}
+
+.menu-button svg {
+  font-size: 22px;
+  color: #95A2B5;
+}
+
+.menu-dropdown {
+  position: absolute;
+
+  top: 42px;
+  right: 0;
+
+  width: 170px;
+
+  background: #fff;
+
+  border-radius: 16px;
+
+  box-shadow: 0 12px 30px rgba(0,0,0,.12);
+
+  overflow: hidden;
+
+  z-index: 999;
+}
+
+.menu-dropdown button {
+  width: 100%;
+
+  border: none;
+  background: white;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 14px 18px;
+
+  cursor: pointer;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  transition: .2s;
+}
+
+.menu-dropdown button:hover {
+  background: #F7FBFF;
+}
+
+.menu-dropdown svg {
+  font-size: 18px;
+}
+
+.delete-btn {
+  color: #EF4444;
+}

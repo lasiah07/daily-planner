@@ -4,11 +4,15 @@ import {
   RiCheckboxBlankCircleLine,
 } from "react-icons/ri";
 
+import TaskMenu from "../TaskMenu/TaskMenu";
+
 function TaskCard({
   id,
   title,
   completed,
   onToggle,
+  onDelete,
+  onEdit,
 }) {
   return (
     <div
@@ -34,6 +38,11 @@ function TaskCard({
       >
         {title}
       </span>
+
+      <TaskMenu
+        onEdit={() => onEdit(id)}
+        onDelete={() => onDelete(id)}
+      />
     </div>
   );
 }

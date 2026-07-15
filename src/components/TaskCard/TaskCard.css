@@ -58,3 +58,7 @@
   text-decoration: line-through;
   color: #AAB7C7;
 }
+
+.task-title{
+    flex:1;
+}
