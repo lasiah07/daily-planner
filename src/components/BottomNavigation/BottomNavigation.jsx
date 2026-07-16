@@ -3,14 +3,16 @@ import { NavLink } from "react-router-dom";
 
 import {
   RiHome5Fill,
-  RiCalendar2Fill,
   RiStickyNoteFill,
+  RiCalendar2Fill,
   RiUser3Fill,
+  RiAddLine,
 } from "react-icons/ri";
 
-function BottomNavigation() {
+function BottomNavigation({ onAddClick }) {
   return (
     <nav className="bottom-nav">
+
       <NavLink
         to="/home"
         className={({ isActive }) =>
@@ -21,6 +23,25 @@ function BottomNavigation() {
         <span>Home</span>
       </NavLink>
 
+      {/* NOTES PINDAH KE KIRI */}
+      <NavLink
+        to="/notes"
+        className={({ isActive }) =>
+          `nav-item ${isActive ? "active" : ""}`
+        }
+      >
+        <RiStickyNoteFill />
+        <span>Notes</span>
+      </NavLink>
+
+      <button
+        className="add-button"
+        onClick={onAddClick}
+      >
+        <RiAddLine />
+      </button>
+
+      {/* CALENDAR PINDAH KE KANAN */}
       <NavLink
         to="/calendar"
         className={({ isActive }) =>
@@ -32,16 +53,6 @@ function BottomNavigation() {
       </NavLink>
 
       <NavLink
-        to="/notes"
-        className={({ isActive }) =>
-          `nav-item ${isActive ? "active" : ""}`
-        }
-      >
-        <RiStickyNoteFill />
-        <span>Notes</span>
-      </NavLink>
-
-      <NavLink
         to="/profile"
         className={({ isActive }) =>
           `nav-item ${isActive ? "active" : ""}`
@@ -50,6 +61,7 @@ function BottomNavigation() {
         <RiUser3Fill />
         <span>Profile</span>
       </NavLink>
+
     </nav>
   );
 }
