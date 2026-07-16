@@ -7,6 +7,7 @@ import {
 import Home from "./pages/Home/Home";
 import Calendar from "./pages/Calendar/Calendar";
 import Notes from "./pages/Notes/Notes";
+import Profile from "./pages/Profile/Profile";
 
 import BottomNavigation from "./components/BottomNavigation/BottomNavigation";
 
@@ -32,6 +33,11 @@ function App() {
         <Route
           path="/notes"
           element={<Notes />}
+        />
+
+        <Route
+          path="/profile"
+          element={<Profile />}
         />
 
         <Route
