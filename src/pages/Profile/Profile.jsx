@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./Profile.css";
+import { useNavigate } from "react-router-dom";
 
 import {
   RiUser3Fill,
@@ -8,10 +9,12 @@ import {
   RiPaletteLine,
   RiNotification3Line,
   RiInformationLine,
+  RiHistoryLine,
   RiArrowRightSLine,
 } from "react-icons/ri";
 
 function Profile() {
+  const navigate = useNavigate();
   const [tasks] = useState(() => {
     const saved = localStorage.getItem(
       "planora_tasks"
@@ -102,6 +105,23 @@ function Profile() {
       <div className="settings-card">
 
         <h3>Settings</h3>
+
+        <button 
+        className="setting-item"
+        onClick={() => navigate("/history")}
+        >
+
+          <div className="setting-left">
+
+            <RiHistoryLine />
+
+            <span>Activity History</span>
+
+          </div>
+
+          <RiArrowRightSLine />
+
+        </button>
 
         <button className="setting-item">
 

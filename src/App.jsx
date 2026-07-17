@@ -10,14 +10,15 @@ import Notes from "./pages/Notes/Notes";
 import Profile from "./pages/Profile/Profile";
 
 import BottomNavigation from "./components/BottomNavigation/BottomNavigation";
+import History from "./pages/History/History";
 
 function App() {
   return (
     <>
       <Routes>
         <Route
-          path="/"
-          element={<Navigate to="/home" />}
+          path="/history"
+          element={<History />}
         />
 
         <Route
