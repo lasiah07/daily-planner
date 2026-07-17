@@ -1,0 +1,92 @@
+.routine-page {
+  max-width: 430px;
+  margin: auto;
+  padding: 28px 20px 120px;
+}
+
+.routine-page h1 {
+  font-size: 30px;
+  font-weight: 800;
+  color: #2f3a4a;
+  margin-bottom: 10px;
+}
+
+.routine-subtitle {
+  font-size: 15px;
+  color: #7c8a9a;
+  margin-bottom: 24px;
+}
+
+.month-card {
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 22px;
+
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+}
+
+.month-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 22px;
+}
+
+.month-header h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #2f3a4a;
+}
+
+.routine-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+}
+
+.routine-box {
+  aspect-ratio: 1/1;
+
+  border-radius: 8px;
+
+  transition: 0.25s;
+}
+
+.routine-box:hover {
+  transform: scale(1.08);
+}
+
+.completed {
+  background: #79d98c;
+}
+
+.partial {
+  background: #ffd76a;
+}
+
+.empty {
+  background: #e9eef5;
+}
+
+@media (max-width: 480px) {
+  .routine-page {
+    padding: 24px 16px 120px;
+  }
+
+  .routine-page h1 {
+    font-size: 26px;
+  }
+
+  .month-card {
+    padding: 18px;
+  }
+
+  .routine-grid {
+    gap: 8px;
+  }
+
+  .routine-box {
+    border-radius: 6px;
+  }
+}

@@ -8,7 +8,7 @@ import Home from "./pages/Home/Home";
 import Calendar from "./pages/Calendar/Calendar";
 import Notes from "./pages/Notes/Notes";
 import Profile from "./pages/Profile/Profile";
-
+import Routine from "./pages/Routine/Routine";
 import BottomNavigation from "./components/BottomNavigation/BottomNavigation";
 import History from "./pages/History/History";
 
@@ -19,6 +19,11 @@ function App() {
         <Route
           path="/history"
           element={<History />}
+        />
+
+        <Route
+          path="/routine"
+          element={<Routine />}
         />
 
         <Route
