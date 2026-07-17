@@ -9,6 +9,7 @@ import AddTaskModal from "../../components/AddTaskModal/AddTaskModal";
 import AccordionSection from "../../components/AccordionSection/AccordionSection";
 import ConfirmModal from "../../components/ConfirmModal/ConfirmModal";
 import FloatingButton from "../../components/FloatingButton/FloatingButton";
+import DailyReflection from "../../components/DailyReflection/DailyReflection";
 
 import { user, tasks } from "../../data/dummyData";
 
@@ -114,6 +115,7 @@ function Home() {
 
   return (
     <div className="home">
+
       <GreetingCard
         name={user.name}
         quote={user.quote}
@@ -147,6 +149,9 @@ function Home() {
           onToggle={toggleTask}
         />
       </AccordionSection>
+
+      {/* Daily Reflection */}
+      <DailyReflection />
 
       <AddTaskModal
         isOpen={isModalOpen}

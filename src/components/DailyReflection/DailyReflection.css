@@ -1,0 +1,189 @@
+.reflection-card {
+  background: #ffffff;
+
+  border-radius: 22px;
+
+  padding: 22px;
+
+  margin-top: 24px;
+
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+}
+
+.reflection-card h2 {
+  font-size: 22px;
+  font-weight: 800;
+
+  color: #2f3a4a;
+
+  margin-bottom: 8px;
+}
+
+.reflection-card p {
+  font-size: 15px;
+
+  color: #7c8a9a;
+
+  margin-bottom: 22px;
+}
+
+.mood-list {
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 12px;
+
+  margin-bottom: 22px;
+}
+
+.mood-btn {
+  width: 52px;
+  height: 52px;
+
+  border: none;
+
+  border-radius: 16px;
+
+  background: #f5f9fc;
+
+  color: #67c6ff;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+
+  transition: 0.25s;
+}
+
+.mood-btn svg {
+  font-size: 28px;
+}
+
+.mood-btn:hover {
+  background: #67c6ff;
+
+  color: white;
+
+  transform: translateY(-3px);
+}
+
+.reflection-card textarea {
+  width: 100%;
+
+  min-height: 120px;
+
+  padding: 16px;
+
+  border: 1px solid #e5edf5;
+
+  border-radius: 16px;
+
+  resize: none;
+
+  outline: none;
+
+  font-size: 15px;
+
+  font-family: inherit;
+
+  margin-bottom: 20px;
+
+  transition: 0.25s;
+
+  box-sizing: border-box;
+}
+
+.reflection-card textarea:focus {
+  border-color: #67c6ff;
+
+  box-shadow: 0 0 0 3px rgba(103, 198, 255, 0.15);
+}
+
+.save-reflection {
+  width: 100%;
+
+  height: 52px;
+
+  border: none;
+
+  border-radius: 16px;
+
+  background: linear-gradient(
+    135deg,
+    #8ed7ff,
+    #5cb9ff
+  );
+
+  color: white;
+
+  font-size: 16px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: 0.25s;
+}
+
+.save-reflection:hover {
+  transform: translateY(-2px);
+
+  box-shadow: 0 10px 24px rgba(92, 185, 255, 0.35);
+}
+
+.save-reflection:active {
+  transform: scale(0.98);
+}
+
+@media (max-width: 480px) {
+  .reflection-card {
+    padding: 18px;
+  }
+
+  .mood-btn {
+    width: 46px;
+    height: 46px;
+  }
+
+  .mood-btn svg {
+    font-size: 24px;
+  }
+
+  .reflection-card textarea {
+    min-height: 100px;
+  }
+}
+
+.mood-btn.selected {
+
+    background:#67C6FF;
+
+    color:white;
+
+    transform:translateY(-3px);
+
+    box-shadow:
+    0 10px 22px rgba(103,198,255,.35);
+
+}
+
+.save-reflection{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:8px;
+
+}
+
+.reflection-card h2{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
