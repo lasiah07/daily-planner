@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./Home.css";
 
 import GreetingCard from "../../components/GreetingCard/GreetingCard";
@@ -10,110 +10,107 @@ import AccordionSection from "../../components/AccordionSection/AccordionSection
 import ConfirmModal from "../../components/ConfirmModal/ConfirmModal";
 import FloatingButton from "../../components/FloatingButton/FloatingButton";
 import DailyReflection from "../../components/DailyReflection/DailyReflection";
+import { useTasks } from "../../context/TaskContext";
 
-import { user, tasks } from "../../data/dummyData";
+import { user } from "../../data/dummyData";
+
 
 function Home() {
-  const [taskList, setTaskList] = useState(() => {
-    const savedTasks = localStorage.getItem("planora_tasks");
-    return savedTasks ? JSON.parse(savedTasks) : tasks;
-  });
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const {
+    tasks: taskList,
+    addTask,
+    updateTask,
+    deleteTask: removeTask,
+    toggleTask,
+  } = useTasks();
 
-  const [editingTask, setEditingTask] = useState(null);
+  const [isModalOpen, setIsModalOpen] =
+    useState(false);
 
-  const [selectedTask, setSelectedTask] = useState(null);
-  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const [editingTask, setEditingTask] =
+    useState(null);
 
-  useEffect(() => {
-    localStorage.setItem(
-      "planora_tasks",
-      JSON.stringify(taskList)
-    );
-  }, [taskList]);
+  const [selectedTask, setSelectedTask] =
+    useState(null);
 
-  const toggleTask = (id) => {
-    setTaskList(
-      taskList.map((task) =>
-        task.id === id
-          ? {
-              ...task,
-              completed: !task.completed,
-            }
-          : task
-      )
-    );
-  };
+  const [isDeleteOpen, setIsDeleteOpen] =
+    useState(false);
 
-  const addTask = (taskData) => {
+  const handleAddTask = (taskData) => {
+
     if (taskData.id) {
-      setTaskList(
-        taskList.map((task) =>
-          task.id === taskData.id
-            ? {
-                ...task,
-                title: taskData.title,
-                deadline: taskData.deadline,
-              }
-            : task
-        )
-      );
+
+      updateTask({
+        ...taskData,
+        completed:
+          editingTask?.completed ?? false,
+      });
+
     } else {
-      const newTask = {
+
+      addTask({
         id: Date.now(),
         title: taskData.title,
         completed: false,
         deadline: taskData.deadline,
-      };
+      });
 
-      setTaskList([...taskList, newTask]);
     }
 
     setEditingTask(null);
     setIsModalOpen(false);
+
   };
 
-  const editTask = (id) => {
+  const handleEditTask = (id) => {
+
     const task = taskList.find(
       (task) => task.id === id
     );
 
     setEditingTask(task);
+
     setIsModalOpen(true);
+
   };
 
-  const deleteTask = (id) => {
+  const handleDeleteTask = (id) => {
+
     setSelectedTask(id);
+
     setIsDeleteOpen(true);
+
   };
 
   const confirmDelete = () => {
-    setTaskList(
-      taskList.filter(
-        (task) => task.id !== selectedTask
-      )
-    );
+
+    removeTask(selectedTask);
 
     setSelectedTask(null);
+
     setIsDeleteOpen(false);
+
   };
 
-  const completedTasks = taskList.filter(
-    (task) => task.completed
-  ).length;
+  const completedTasks =
+    taskList.filter(
+      (task) => task.completed
+    ).length;
 
-  const totalTasks = taskList.length;
+  const totalTasks =
+    taskList.length;
 
-  const todayTasks = taskList.filter(
-    (task) => !task.deadline
-  );
+  const todayTasks =
+    taskList.filter(
+      (task) => !task.deadline
+    );
 
-  const deadlineTasks = taskList.filter(
-    (task) => task.deadline
-  );
-
-  return (
+  const deadlineTasks =
+    taskList.filter(
+      (task) => task.deadline
+    );
+      return (
     <div className="home">
 
       <GreetingCard
@@ -134,8 +131,8 @@ function Home() {
         <TaskList
           tasks={todayTasks}
           onToggle={toggleTask}
-          onDelete={deleteTask}
-          onEdit={editTask}
+          onDelete={handleDeleteTask}
+          onEdit={handleEditTask}
         />
       </AccordionSection>
 
@@ -150,7 +147,6 @@ function Home() {
         />
       </AccordionSection>
 
-      {/* Daily Reflection */}
       <DailyReflection />
 
       <AddTaskModal
@@ -159,7 +155,7 @@ function Home() {
           setEditingTask(null);
           setIsModalOpen(false);
         }}
-        onAddTask={addTask}
+        onAddTask={handleAddTask}
         editTask={editingTask}
       />
 

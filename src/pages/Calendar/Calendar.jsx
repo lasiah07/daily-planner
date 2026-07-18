@@ -1,4 +1,5 @@
 import AddTaskModal from "../../components/AddTaskModal/AddTaskModal";
+import AddEventModal from "../../components/AddEventModal/AddEventModal";
 
 import { useState, useEffect } from "react";
 import "./Calendar.css";
@@ -8,7 +9,12 @@ import {
   RiArrowRightSLine,
 } from "react-icons/ri";
 
-import AddEventModal from "../../components/AddEventModal/AddEventModal";
+import {
+  getEvents,
+  saveEvents,
+} from "../../services/eventStorage";
+
+import { useTasks } from "../../context/TaskContext";
 
 function Calendar() {
   const [currentDate, setCurrentDate] =
@@ -18,25 +24,24 @@ function Calendar() {
     useState(false);
 
   const [isTaskModalOpen, setIsTaskModalOpen] =
-  useState(false);
+    useState(false);
 
   const [selectedDate, setSelectedDate] =
     useState("");
 
   const [events, setEvents] = useState(() => {
-    const savedEvents =
-      localStorage.getItem("planora_events");
-    return savedEvents
-      ? JSON.parse(savedEvents)
-      : [];
+    return getEvents();
   });
-const [tasks] = useState(() => {
-  const saved = localStorage.getItem(
-    "planora_tasks"
-  );
 
-  return saved ? JSON.parse(saved) : [];
-});
+  const {
+    tasks,
+    addTask,
+  } = useTasks();
+  
+
+  useEffect(() => {
+    saveEvents(events);
+  }, [events]);
 
   const months = [
     "Januari",
@@ -82,6 +87,7 @@ const [tasks] = useState(() => {
     setCurrentDate(
       new Date(year, month - 1, 1)
     );
+
     setSelectedDate("");
   };
 
@@ -89,20 +95,24 @@ const [tasks] = useState(() => {
     setCurrentDate(
       new Date(year, month + 1, 1)
     );
+
     setSelectedDate("");
   };
 
   const handleSelectDate = (date) => {
     if (!date) return;
-    const fullDate = `${date} ${
-      months[month]
-    } ${year}`;
+
+    const fullDate = `${date} ${months[month]} ${year}`;
+
     setSelectedDate(fullDate);
   };
 
   const handleSaveEvent = (event) => {
-    setEvents((prev) => [...prev, event]);
-      setIsModalOpen(false);
+    setEvents((prev) => [
+      ...prev,
+      event,
+    ]);
+
     setIsModalOpen(false);
   };
 
@@ -119,30 +129,34 @@ const [tasks] = useState(() => {
   const today = new Date();
 
   const selectedEvents = events.filter(
-    (event) => event.date === selectedDate
+    (event) =>
+      event.date === selectedDate
   );
 
-  // selectedDate is now a full string like "15 Juli 2026",
-  // so we pull the day number back out for comparisons below.
   const selectedDay = selectedDate
     ? parseInt(selectedDate, 10)
     : null;
 
   const selectedTasks = selectedDay
     ? tasks.filter((task) => {
-        if (!task.deadline) return false;
+        if (!task.deadline)
+          return false;
 
-        const taskDate = new Date(task.deadline);
+        const taskDate = new Date(
+          task.deadline
+        );
 
         return (
-          taskDate.getDate() === selectedDay &&
-          taskDate.getMonth() === month &&
-          taskDate.getFullYear() === year
+          taskDate.getDate() ===
+            selectedDay &&
+          taskDate.getMonth() ===
+            month &&
+          taskDate.getFullYear() ===
+            year
         );
       })
     : [];
-
-  return (
+      return (
     <div className="calendar-page">
 
       <h1 className="calendar-title">
@@ -228,10 +242,11 @@ const [tasks] = useState(() => {
               )}
 
               {hasEvent && (
-                <div className="event-dot"></div>
+                <div className="event-dot" />
               )}
             </div>
           );
+
         })}
 
       </div>
@@ -239,40 +254,44 @@ const [tasks] = useState(() => {
       {selectedDate && (
 
         <div className="activity-card">
-          <h3>
-            {selectedDate}
-          </h3>
+
+          <h3>{selectedDate}</h3>
 
           <h4>Event</h4>
 
           {selectedEvents.length === 0 ? (
-            <p>
-              Belum ada event.
-            </p>
+            <p>Belum ada event.</p>
           ) : (
             <div className="event-list">
+
               {selectedEvents.map((event) => (
+
                 <div
                   key={event.id}
                   className="event-item"
                 >
                   {event.title}
                 </div>
+
               ))}
+
             </div>
           )}
 
+          <h4>Task</h4>
+
           {selectedTasks.length === 0 ? (
-            <p>
-              Belum ada task.
-            </p>
+            <p>Belum ada task.</p>
           ) : (
             <div className="task-list">
+
               {selectedTasks.map((task) => (
+
                 <div
                   key={task.id}
                   className="task-item"
                 >
+
                   <span>
                     {task.completed
                       ? "✅"
@@ -280,27 +299,35 @@ const [tasks] = useState(() => {
                   </span>
 
                   <p>{task.title}</p>
+
                 </div>
+
               ))}
+
             </div>
           )}
 
           <div className="activity-actions">
 
-    <button className="add-task-btn">
-      + Add Task
-    </button>
+            <button
+              className="add-task-btn"
+              onClick={() =>
+                setIsTaskModalOpen(true)
+              }
+            >
+              + Add Task
+            </button>
 
-    <button
-      className="add-event-btn"
-      onClick={() => setIsModalOpen(true)}
-    >
-      + Add Event
-    </button>
+            <button
+              className="add-event-btn"
+              onClick={() =>
+                setIsModalOpen(true)
+              }
+            >
+              + Add Event
+            </button>
 
-  </div>
-  
-
+          </div>
 
         </div>
 
@@ -315,8 +342,31 @@ const [tasks] = useState(() => {
         onSave={handleSaveEvent}
       />
 
+      <AddTaskModal
+        isOpen={isTaskModalOpen}
+        onClose={() =>
+          setIsTaskModalOpen(false)
+        }
+        defaultDeadline={
+          selectedDay
+            ?`${year}-${String(month + 1).padStart(2, "0")}-${String(selectedDay).padStart(2, "0")}`
+            : ""
+        }
+        onAddTask={(task) => {
+          addTask({
+            id: Date.now(),
+            title: task.title,
+            completed: false,
+            deadline: task.deadline,
+          });
+
+          setIsTaskModalOpen(false);
+        }}
+      />
+
     </div>
   );
 }
+
 
 export default Calendar;

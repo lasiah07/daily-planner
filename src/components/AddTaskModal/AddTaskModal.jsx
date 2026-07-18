@@ -10,6 +10,7 @@ function AddTaskModal({
   onClose,
   onAddTask,
   editTask,
+  defaultDeadline,
 }) {
   const [title, setTitle] = useState("");
   const [hasDeadline, setHasDeadline] =
@@ -24,9 +25,16 @@ function AddTaskModal({
       setDeadline(editTask.deadline || "");
     } else {
       setTitle("");
-      setHasDeadline(false);
-      setDeadline("");
+
+      if (defaultDeadline) {
+        setHasDeadline(true);
+        setDeadline(defaultDeadline);
+      } else {
+        setHasDeadline(false);
+        setDeadline("");
+      }
     }
+      
   }, [editTask, isOpen]);
 
   if (!isOpen) return null;
