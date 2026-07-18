@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./Notes.css";
 
 import {
@@ -12,12 +12,16 @@ import AddNoteModal from "../../components/AddNoteModal/AddNoteModal";
 import NoteCard from "../../components/NoteCard/NoteCard";
 import ConfirmModal from "../../components/ConfirmModal/ConfirmModal";
 import FloatingButton from "../../components/FloatingButton/FloatingButton";
+import { useNotes } from "../../context/NoteContext";
 
 function Notes() {
-  const [notes, setNotes] = useState(() => {
-    const saved = localStorage.getItem("planora_notes");
-    return saved ? JSON.parse(saved) : [];
-  });
+  const {
+    notes,
+    addNote,
+    updateNote,
+    deleteNote,
+    togglePin,
+  } = useNotes ();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingNote, setEditingNote] = useState(null);
@@ -31,12 +35,6 @@ function Notes() {
   const [selectedCategory, setSelectedCategory] =
     useState("Semua");
 
-  useEffect(() => {
-    localStorage.setItem(
-      "planora_notes",
-      JSON.stringify(notes)
-    );
-  }, [notes]);
 
   const saveNote = ({
     title,
@@ -45,21 +43,15 @@ function Notes() {
     color,
   }) => {
     if (editingNote) {
-      setNotes(
-        notes.map((note) =>
-          note.id === editingNote.id
-            ? {
-                ...note,
-                title,
-                content,
-                category,
-                color,
-              }
-            : note
-        )
-      );
+      updateNote({
+        ...editingNote,
+        title,
+        content,
+        category,
+        color,
+      });
     } else {
-      const newNote = {
+      addNote({
         id: Date.now(),
         title,
         content,
@@ -69,15 +61,14 @@ function Notes() {
         date: new Date().toLocaleDateString(
           "id-ID",
           {
-            day: "numeric",
+            day:"numeric",
             month: "short",
             year: "numeric",
           }
         ),
-      };
-
-      setNotes([newNote, ...notes]);
+      });
     }
+    
 
     setEditingNote(null);
     setIsModalOpen(false);
@@ -94,28 +85,12 @@ function Notes() {
   };
 
   const confirmDelete = () => {
-    setNotes(
-      notes.filter(
-        (note) => note.id !== selectedNote
-      )
-    );
+    deleteNote(selectedNote);
 
     setSelectedNote(null);
     setIsDeleteOpen(false);
   };
 
-  const togglePin = (id) => {
-    setNotes(
-      notes.map((note) =>
-        note.id === id
-          ? {
-              ...note,
-              pinned: !note.pinned,
-            }
-          : note
-      )
-    );
-  };
 
   const filteredNotes = notes
     .filter((note) => {

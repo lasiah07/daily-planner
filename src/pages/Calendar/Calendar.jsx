@@ -15,6 +15,7 @@ import {
 } from "../../services/eventStorage";
 
 import { useTasks } from "../../context/TaskContext";
+import { useEvents } from "../../context/EventContext";
 
 function Calendar() {
   const [currentDate, setCurrentDate] =
@@ -29,19 +30,15 @@ function Calendar() {
   const [selectedDate, setSelectedDate] =
     useState("");
 
-  const [events, setEvents] = useState(() => {
-    return getEvents();
-  });
+  const {
+    events,
+    addEvent,
+  } = useEvents();
 
   const {
     tasks,
     addTask,
   } = useTasks();
-  
-
-  useEffect(() => {
-    saveEvents(events);
-  }, [events]);
 
   const months = [
     "Januari",
@@ -108,11 +105,7 @@ function Calendar() {
   };
 
   const handleSaveEvent = (event) => {
-    setEvents((prev) => [
-      ...prev,
-      event,
-    ]);
-
+    addEvent(event);
     setIsModalOpen(false);
   };
 
