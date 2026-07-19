@@ -125,3 +125,47 @@
   background: #b9dff8;
   cursor: not-allowed;
 }
+
+.task-type{
+
+  display:flex;
+
+  gap:12px;
+
+}
+
+.type-btn{
+
+  flex:1;
+
+  padding:12px;
+
+  border-radius:14px;
+
+  border:1px solid #D9E2EC;
+
+  background:white;
+
+  font-weight:600;
+
+  cursor:pointer;
+
+  transition:.25s;
+
+}
+
+.type-btn:hover{
+
+  border-color:#67C6FF;
+
+}
+
+.active-type{
+
+  background:#67C6FF;
+
+  color:white;
+
+  border-color:#67C6FF;
+
+}

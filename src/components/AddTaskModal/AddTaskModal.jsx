@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "./AddTaskModal.css";
+
 import {
   RiCloseLine,
   RiCalendarEventLine,
@@ -13,18 +14,31 @@ function AddTaskModal({
   defaultDeadline,
 }) {
   const [title, setTitle] = useState("");
+
+  const [taskType, setTaskType] =
+    useState("task");
+
   const [hasDeadline, setHasDeadline] =
     useState(false);
+
   const [deadline, setDeadline] =
     useState("");
 
   useEffect(() => {
     if (editTask) {
       setTitle(editTask.title);
+
+      setTaskType(
+        editTask.type || "task"
+      );
+
       setHasDeadline(!!editTask.deadline);
+
       setDeadline(editTask.deadline || "");
     } else {
       setTitle("");
+
+      setTaskType("task");
 
       if (defaultDeadline) {
         setHasDeadline(true);
@@ -34,20 +48,24 @@ function AddTaskModal({
         setDeadline("");
       }
     }
-      
   }, [editTask, isOpen]);
 
   if (!isOpen) return null;
 
   const handleSubmit = () => {
-    if (title.trim() === "") return;
+    if (!title.trim()) return;
 
     onAddTask({
       id: editTask?.id,
       title,
-      deadline: hasDeadline
-        ? deadline
-        : null,
+      type: taskType,
+
+      deadline:
+        taskType === "routine"
+          ? null
+          : hasDeadline
+          ? deadline
+          : null,
     });
 
     onClose();
@@ -61,7 +79,9 @@ function AddTaskModal({
       />
 
       <div className="modal-container">
+
         <div className="modal-header">
+
           <h2>
             {editTask
               ? "Edit Aktivitas"
@@ -74,9 +94,11 @@ function AddTaskModal({
           >
             <RiCloseLine />
           </button>
+
         </div>
 
         <div className="form-group">
+
           <label>Judul Aktivitas</label>
 
           <input
@@ -87,41 +109,95 @@ function AddTaskModal({
               setTitle(e.target.value)
             }
           />
+
         </div>
 
-        <div className="deadline-toggle">
-          <label className="checkbox-row">
-            <input
-              type="checkbox"
-              checked={hasDeadline}
-              onChange={() =>
-                setHasDeadline(
-                  !hasDeadline
-                )
+        <div className="form-group">
+
+          <label>Jenis Aktivitas</label>
+
+          <div className="task-type">
+
+            <button
+              type="button"
+              className={
+                taskType === "task"
+                  ? "type-btn active-type"
+                  : "type-btn"
               }
-            />
-
-            <span>Tambahkan Deadline</span>
-          </label>
-        </div>
-
-        {hasDeadline && (
-          <div className="form-group">
-            <label className="deadline-label">
-              <RiCalendarEventLine />
-              Deadline
-            </label>
-
-            <input
-              type="date"
-              value={deadline}
-              onChange={(e) =>
-                setDeadline(
-                  e.target.value
-                )
+              onClick={() =>
+                setTaskType("task")
               }
-            />
+            >
+              One Time Task
+            </button>
+
+            <button
+              type="button"
+              className={
+                taskType === "routine"
+                  ? "type-btn active-type"
+                  : "type-btn"
+              }
+              onClick={() => {
+                setTaskType("routine");
+                setHasDeadline(false);
+              }}
+            >
+              Routine
+            </button>
+
           </div>
+
+        </div>
+
+        {taskType === "task" && (
+          <>
+            <div className="deadline-toggle">
+
+              <label className="checkbox-row">
+
+                <input
+                  type="checkbox"
+                  checked={hasDeadline}
+                  onChange={() =>
+                    setHasDeadline(
+                      !hasDeadline
+                    )
+                  }
+                />
+
+                <span>
+                  Tambahkan Deadline
+                </span>
+
+              </label>
+
+            </div>
+
+            {hasDeadline && (
+
+              <div className="form-group">
+
+                <label className="deadline-label">
+                  <RiCalendarEventLine />
+                  Deadline
+                </label>
+
+                <input
+                  type="date"
+                  value={deadline}
+                  onChange={(e) =>
+                    setDeadline(
+                      e.target.value
+                    )
+                  }
+                />
+
+              </div>
+
+            )}
+          </>
         )}
 
         <button
@@ -132,6 +208,7 @@ function AddTaskModal({
             ? "Simpan Perubahan"
             : "Simpan"}
         </button>
+
       </div>
     </>
   );

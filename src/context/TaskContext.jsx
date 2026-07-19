@@ -25,6 +25,29 @@ export function TaskProvider({
       : dummyTasks;
   });
 
+useEffect(() => {
+  const today = new Date()
+    .toISOString()
+    .split("T")[0];
+
+  setTasks((prev) =>
+    prev.map((task) => {
+      if (
+        task.type === "routine" &&
+        task.completed &&
+        task.lastChecked !== today
+      ) {
+        return {
+          ...task,
+          completed: false,
+        };
+      }
+
+      return task;
+    })
+  );
+}, []);
+
   useEffect(() => {
     saveTasks(tasks);
   }, [tasks]);
@@ -54,19 +77,28 @@ export function TaskProvider({
     );
   };
 
-  const toggleTask = (id) => {
-    setTasks((prev) =>
-      prev.map((task) =>
-        task.id === id
-          ? {
-              ...task,
-              completed:
-                !task.completed,
-            }
-          : task
-      )
-    );
-  };
+const toggleTask = (id) => {
+  const today = new Date()
+    .toISOString()
+    .split("T")[0];
+
+  setTasks((prev) =>
+    prev.map((task) => {
+      if (task.id !== id) return task;
+
+      const completed = !task.completed;
+
+      return {
+        ...task,
+        completed,
+        lastChecked: today,
+        history: completed
+          ? [...(task.history || []), today]
+          : task.history || [],
+      };
+    })
+  );
+};
 
   return (
     <TaskContext.Provider

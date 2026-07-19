@@ -51,6 +51,7 @@ function Home() {
         ...taskData,
         completed:
           editingTask?.completed ?? false,
+          type: taskData.type,
       });
 
     } else {
@@ -60,6 +61,7 @@ function Home() {
         title: taskData.title,
         completed: false,
         deadline: taskData.deadline,
+        type: taskData.type,
       });
 
     }
@@ -99,23 +101,39 @@ function Home() {
 
   };
 
-  const completedTasks =
-    taskList.filter(
-      (task) => task.completed
-    ).length;
+const oneTimeTasks = taskList.filter(
+  (task) => task.type !== "routine"
+);
 
-  const totalTasks =
-    taskList.length;
+const completedTasks =
+  oneTimeTasks.filter(
+    (task) => task.completed
+  ).length;
 
-  const todayTasks =
-    taskList.filter(
-      (task) => !task.deadline
-    );
+const totalTasks =
+  oneTimeTasks.length;
 
-  const deadlineTasks =
-    taskList.filter(
-      (task) => task.deadline
-    );
+  const routineTasks = taskList.filter(
+  (task) => task.type === "routine"
+);
+
+const todayTasks = taskList.filter(
+  (task) =>
+    task.type !== "routine" &&
+    !task.deadline
+);
+
+const completedRoutine =
+  routineTasks.filter(
+    (task) => task.completed
+  ).length;
+
+const deadlineTasks = taskList.filter(
+  (task) =>
+    task.type !== "routine" &&
+    task.deadline
+);
+
       return (
     <div className="home">
 
@@ -130,9 +148,23 @@ function Home() {
       />
 
       <AccordionSection
-        title="Today's Plan"
-        count={todayTasks.length}
-        defaultOpen={false}
+        title="Today's Routine"
+        count={routineTasks.length}
+        defaultOpen={true}
+      >
+        <TaskList
+          tasks={routineTasks}
+          onToggle={toggleTask}
+          onDelete={handleDeleteTask}
+          onEdit={handleEditTask}
+        />
+      </AccordionSection>
+
+        
+      <AccordionSection
+        title={`Today's Routine (${completedRoutine}/${routineTasks.length})`}
+        count={routineTasks.length}
+        defaultOpen={true}
       >
         <TaskList
           tasks={todayTasks}
