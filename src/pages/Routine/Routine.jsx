@@ -48,10 +48,29 @@ for (let i = 29; i >= 0; i--) {
   });
 }
 
-const totalCompleted = heatmapDays.filter(
-  (day) => day.completed > 0
-).length;
+const activeDays = new Set();
 
+routineTasks.forEach((task) => {
+  (task.history || []).forEach((date) => {
+    activeDays.add(date);
+  });
+});
+
+const totalCompleted = activeDays.size;
+const totalHistory = routineTasks.reduce(
+  (total, task) =>
+    total + (task.history?.length || 0),
+  0
+);
+
+const averageCompletion =
+  routineTasks.length === 0
+    ? 0
+    : Math.round(
+        (totalHistory /
+          (routineTasks.length * 30)) *
+          100
+      );
 let currentStreak = 0;
 
 for (let i = heatmapDays.length - 1; i >= 0; i--) {

@@ -48,9 +48,40 @@ useEffect(() => {
   );
 }, []);
 
-  useEffect(() => {
-    saveTasks(tasks);
-  }, [tasks]);
+useEffect(() => {
+
+  const today = new Date()
+    .toISOString()
+    .split("T")[0];
+
+  const updatedTasks = tasks.map((task) => {
+
+    if (task.type !== "routine") {
+      return task;
+    }
+
+    if (task.lastReset === today) {
+      return task;
+    }
+
+    return {
+      ...task,
+      completed: false,
+      lastReset: today,
+    };
+
+  });
+
+  saveTasks(updatedTasks);
+
+  if (
+    JSON.stringify(updatedTasks) !==
+    JSON.stringify(tasks)
+  ) {
+    setTasks(updatedTasks);
+  }
+
+}, [tasks]);
 
   const addTask = (task) => {
     setTasks((prev) => [
@@ -76,7 +107,6 @@ useEffect(() => {
       )
     );
   };
-
 const toggleTask = (id) => {
   const today = new Date()
     .toISOString()
@@ -88,13 +118,21 @@ const toggleTask = (id) => {
 
       const completed = !task.completed;
 
+      let history = task.history || [];
+
+      if (
+        task.type === "routine" &&
+        completed &&
+        !history.includes(today)
+      ) {
+        history = [...history, today];
+      }
+
       return {
         ...task,
         completed,
         lastChecked: today,
-        history: completed
-          ? [...(task.history || []), today]
-          : task.history || [],
+        history,
       };
     })
   );
