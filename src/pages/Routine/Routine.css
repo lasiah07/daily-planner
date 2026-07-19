@@ -79,6 +79,39 @@
   color: #6D7A89;
 }
 
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+
+  margin-bottom: 18px;
+}
+
+.stat-card {
+  background: white;
+
+  border: 1px solid #E7EEF6;
+
+  border-radius: 18px;
+
+  padding: 20px;
+
+  text-align: center;
+
+  box-shadow: 0 8px 24px rgba(0,0,0,.04);
+}
+
+.stat-card h2 {
+  font-size: 28px;
+  color: #67C6FF;
+  margin-bottom: 6px;
+}
+
+.stat-card p {
+  font-size: 13px;
+  color: #7C8A9A;
+}
+
 .heatmap-grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);

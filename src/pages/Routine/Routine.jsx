@@ -48,6 +48,35 @@ for (let i = 29; i >= 0; i--) {
   });
 }
 
+const totalCompleted = heatmapDays.filter(
+  (day) => day.completed > 0
+).length;
+
+let currentStreak = 0;
+
+for (let i = heatmapDays.length - 1; i >= 0; i--) {
+  if (heatmapDays[i].completed > 0) {
+    currentStreak++;
+  } else {
+    break;
+  }
+}
+
+let bestStreak = 0;
+let streak = 0;
+
+heatmapDays.forEach((day) => {
+  if (day.completed > 0) {
+    streak++;
+
+    if (streak > bestStreak) {
+      bestStreak = streak;
+    }
+  } else {
+    streak = 0;
+  }
+});
+
   return (
     <div className="routine-page">
       <h1>Routine Tracker</h1>
@@ -55,6 +84,29 @@ for (let i = 29; i >= 0; i--) {
       <p className="routine-subtitle">
         Build consistency one day at a time.
       </p>
+<div className="stats-grid">
+
+  <div className="stat-card">
+    <h2>{currentStreak}</h2>
+    <p>Current Streak</p>
+  </div>
+
+  <div className="stat-card">
+    <h2>{bestStreak}</h2>
+    <p>Best Streak</p>
+  </div>
+
+  <div className="stat-card">
+    <h2>{routineTasks.length}</h2>
+    <p>Routine</p>
+  </div>
+
+  <div className="stat-card">
+    <h2>{totalCompleted}</h2>
+    <p>Active Days</p>
+  </div>
+
+</div>
 
     <div className="month-card">
 
