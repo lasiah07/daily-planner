@@ -13,6 +13,7 @@ import NoteCard from "../../components/NoteCard/NoteCard";
 import ConfirmModal from "../../components/ConfirmModal/ConfirmModal";
 import FloatingButton from "../../components/FloatingButton/FloatingButton";
 import { useNotes } from "../../context/NoteContext";
+import { useUI } from "../../context/UIContext";
 
 function Notes() {
   const {
@@ -35,6 +36,10 @@ function Notes() {
   const [selectedCategory, setSelectedCategory] =
     useState("Semua");
 
+  const {
+  activeModal,
+  closeModal,
+} = useUI();
 
   const saveNote = ({
     title,
@@ -210,10 +215,14 @@ function Notes() {
       )}
 
       <AddNoteModal
-        isOpen={isModalOpen}
+        isOpen={
+          isModalOpen ||
+          activeModal === "note"
+        }
         onClose={() => {
           setEditingNote(null);
           setIsModalOpen(false);
+          closeModal();
         }}
         onSave={saveNote}
         editNote={editingNote}
@@ -230,12 +239,6 @@ function Notes() {
         onConfirm={confirmDelete}
       />
 
-      <FloatingButton
-        onClick={() => {
-          setEditingNote(null);
-          setIsModalOpen(true);
-        }}
-      />
 
     </div>
   );

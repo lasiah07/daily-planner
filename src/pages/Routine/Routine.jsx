@@ -5,7 +5,6 @@ function Routine() {
 
   return (
     <div className="routine-page">
-
       <h1>Routine Tracker</h1>
 
       <p className="routine-subtitle">
@@ -13,30 +12,25 @@ function Routine() {
       </p>
 
       <div className="month-card">
-
         <div className="month-header">
           <h3>July 2026</h3>
         </div>
 
         <div className="routine-grid">
-
           {days.map((_, index) => (
             <div
               key={index}
               className={`routine-box ${
                 index % 5 === 0
-                  ? "completed"
+                  ? "routine-completed"
                   : index % 3 === 0
-                  ? "partial"
-                  : "empty"
+                  ? "routine-partial"
+                  : "routine-empty"
               }`}
             />
           ))}
-
         </div>
-
       </div>
-
     </div>
   );
 }

@@ -21,7 +21,6 @@
   background: #ffffff;
   border-radius: 22px;
   padding: 22px;
-
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
 }
 
@@ -29,7 +28,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   margin-bottom: 22px;
 }
 
@@ -46,10 +44,8 @@
 }
 
 .routine-box {
-  aspect-ratio: 1/1;
-
+  aspect-ratio: 1 / 1;
   border-radius: 8px;
-
   transition: 0.25s;
 }
 
@@ -57,15 +53,15 @@
   transform: scale(1.08);
 }
 
-.completed {
+.routine-completed {
   background: #79d98c;
 }
 
-.partial {
+.routine-partial {
   background: #ffd76a;
 }
 
-.empty {
+.routine-empty {
   background: #e9eef5;
 }
 

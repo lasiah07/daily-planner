@@ -1,5 +1,11 @@
 import "./BottomNavigation.css";
-import { NavLink } from "react-router-dom";
+
+import {
+  NavLink,
+  useLocation,
+} from "react-router-dom";
+
+import { useUI } from "../../context/UIContext";
 
 import {
   RiHome5Fill,
@@ -9,7 +15,25 @@ import {
   RiAddLine,
 } from "react-icons/ri";
 
-function BottomNavigation({ onAddClick }) {
+function BottomNavigation() {
+  const location = useLocation();
+
+  const { openModal } = useUI();
+
+  const showAddButton =
+    location.pathname === "/home" ||
+    location.pathname === "/notes";
+
+  const handleAdd = () => {
+    if (location.pathname === "/home") {
+      openModal("task");
+    }
+
+    if (location.pathname === "/notes") {
+      openModal("note");
+    }
+  };
+
   return (
     <nav className="bottom-nav">
 
@@ -23,7 +47,6 @@ function BottomNavigation({ onAddClick }) {
         <span>Home</span>
       </NavLink>
 
-      {/* NOTES PINDAH KE KIRI */}
       <NavLink
         to="/notes"
         className={({ isActive }) =>
@@ -34,14 +57,15 @@ function BottomNavigation({ onAddClick }) {
         <span>Notes</span>
       </NavLink>
 
-      <button
-        className="add-button"
-        onClick={onAddClick}
-      >
-        <RiAddLine />
-      </button>
+      {showAddButton && (
+        <button
+          className="add-button"
+          onClick={handleAdd}
+        >
+          <RiAddLine />
+        </button>
+      )}
 
-      {/* CALENDAR PINDAH KE KANAN */}
       <NavLink
         to="/calendar"
         className={({ isActive }) =>

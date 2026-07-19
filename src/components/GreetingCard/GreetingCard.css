@@ -1,55 +1,233 @@
 .greeting-card{
 
-    margin:24px;
+  margin:24px;
 
-    padding:28px;
+  padding:24px 26px;
 
-    border-radius:28px;
+  border-radius:28px;
 
-    background:linear-gradient(
-        135deg,
-        #7CCBFF,
-        #DDF3FF
-    );
+  display:flex;
 
-    display:flex;
+  justify-content:space-between;
 
-    justify-content:space-between;
+  align-items:center;
 
-    align-items:center;
+  transition:.35s;
 
-    box-shadow:0 12px 30px rgba(0,0,0,.08);
+  box-shadow:
+  0 10px 25px rgba(0,0,0,.06);
 
 }
 
-.greeting-text h4{
+/* ===== MORNING ===== */
 
-    color:white;
+.morning{
 
-    font-size:18px;
-
-}
-
-.greeting-text h1{
-
-    color:white;
-
-    font-size:38px;
-
-    margin-top:6px;
+  background:
+  linear-gradient(
+  135deg,
+  #FFF6D8,
+  #DDF3FF
+  );
 
 }
 
-.greeting-text p{
+/* ===== AFTERNOON ===== */
 
-    color:white;
+.afternoon{
 
-    margin-top:12px;
+  background:
+  linear-gradient(
+  135deg,
+  #8FD3FF,
+  #EAF7FF
+  );
 
 }
 
-.sun{
+/* ===== EVENING ===== */
 
-    font-size:70px;
+.evening{
+
+  background:
+  linear-gradient(
+  135deg,
+  #FFD8B6,
+  #FFF1DD
+  );
+
+}
+
+/* ===== NIGHT ===== */
+
+.night{
+
+  background:
+  linear-gradient(
+  135deg,
+  #243B63,
+  #3E5C86
+  );
+
+}
+
+/* ======================= */
+
+.greeting-left{
+
+  flex:1;
+
+}
+
+.greeting-label{
+
+  font-size:14px;
+
+  font-weight:700;
+
+  letter-spacing:.5px;
+
+  margin-bottom:6px;
+
+}
+
+.greeting-left h1{
+
+  font-size:30px;
+
+  font-weight:800;
+
+  margin:4px 0;
+
+}
+
+.greeting-date{
+
+  font-size:14px;
+
+  margin-bottom:14px;
+
+}
+
+.greeting-quote{
+
+  font-size:15px;
+
+  line-height:1.6;
+
+  max-width:230px;
+
+}
+
+/* ===== TEXT ===== */
+
+.morning,
+.afternoon,
+.evening{
+
+  color:#24324B;
+
+}
+
+.night{
+
+  color:white;
+
+}
+
+.morning .greeting-label,
+.afternoon .greeting-label,
+.evening .greeting-label{
+
+  color:#5D7EA4;
+
+}
+
+.night .greeting-label{
+
+  color:#D6E4F7;
+
+}
+
+.morning .greeting-date,
+.afternoon .greeting-date,
+.evening .greeting-date{
+
+  color:#7C8CA2;
+
+}
+
+.night .greeting-date{
+
+  color:#C9D7EA;
+
+}
+
+.morning .greeting-quote,
+.afternoon .greeting-quote,
+.evening .greeting-quote{
+
+  color:#5F7085;
+
+}
+
+.night .greeting-quote{
+
+  color:#E2EBF8;
+
+}
+
+/* ===== ICON ===== */
+
+.greeting-icon{
+
+  width:68px;
+
+  height:68px;
+
+  border-radius:20px;
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  background:
+  rgba(255,255,255,.28);
+
+  backdrop-filter:blur(10px);
+
+}
+
+.greeting-icon svg{
+
+  font-size:34px;
+
+}
+
+/* ===== ICON COLOR ===== */
+
+.morning .greeting-icon svg{
+
+  color:#F4B63C;
+
+}
+
+.afternoon .greeting-icon svg{
+
+  color:#57A9F3;
+
+}
+
+.evening .greeting-icon svg{
+
+  color:#F29A5B;
+
+}
+
+.night .greeting-icon svg{
+
+  color:white;
 
 }

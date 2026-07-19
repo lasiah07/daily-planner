@@ -11,6 +11,7 @@ import ConfirmModal from "../../components/ConfirmModal/ConfirmModal";
 import FloatingButton from "../../components/FloatingButton/FloatingButton";
 import DailyReflection from "../../components/DailyReflection/DailyReflection";
 import { useTasks } from "../../context/TaskContext";
+import { useUI } from "../../context/UIContext";
 
 import { user } from "../../data/dummyData";
 
@@ -24,6 +25,11 @@ function Home() {
     deleteTask: removeTask,
     toggleTask,
   } = useTasks();
+
+  const {
+  activeModal,
+  closeModal,
+} = useUI();
 
   const [isModalOpen, setIsModalOpen] =
     useState(false);
@@ -150,10 +156,14 @@ function Home() {
       <DailyReflection />
 
       <AddTaskModal
-        isOpen={isModalOpen}
+        isOpen={
+          isModalOpen ||
+          activeModal === "task"
+        }
         onClose={() => {
           setEditingTask(null);
           setIsModalOpen(false);
+          closeModal();
         }}
         onAddTask={handleAddTask}
         editTask={editingTask}
@@ -170,12 +180,6 @@ function Home() {
         onConfirm={confirmDelete}
       />
 
-      <FloatingButton
-        onClick={() => {
-          setEditingTask(null);
-          setIsModalOpen(true);
-        }}
-      />
 
     </div>
   );

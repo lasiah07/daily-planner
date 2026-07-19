@@ -1,27 +1,30 @@
 .task-card {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
 
   background: #ffffff;
+  padding: 16px 18px;
 
-  padding: 18px 20px;
+  border-radius: 20px;
 
-  border-radius: 22px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+  margin-bottom: 14px;
 
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(225, 232, 240, 0.8);
 
-  margin-bottom: 16px;
-
-  transition: .25s;
+  transition: all 0.2s ease;
 }
 
 .task-card:hover {
   transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.06);
 }
 
+/* Card ketika task selesai */
 .completed-card {
-  background: #F3FAFF;
+  background: #FCFEFF;
+  border-color: #D9EEF9;
 }
 
 .task-check {
@@ -33,32 +36,33 @@
   align-items: center;
 
   cursor: pointer;
+  padding: 0;
 }
 
 .checked {
-  font-size: 30px;
-  color: #67C6FF;
+  font-size: 26px;
+  color: #6BBDF5;
 }
 
 .unchecked {
-  font-size: 30px;
+  font-size: 26px;
   color: #C8D4E2;
 }
 
 .task-title {
   flex: 1;
 
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 600;
+  line-height: 1.4;
 
   color: #24324B;
+
+  transition: color 0.2s ease;
 }
 
+/* Teks ketika selesai */
 .completed {
   text-decoration: line-through;
-  color: #AAB7C7;
-}
-
-.task-title{
-    flex:1;
+  color: #9AA8B8;
 }
