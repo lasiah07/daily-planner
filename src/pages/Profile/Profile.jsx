@@ -2,20 +2,22 @@ import "./Profile.css";
 
 import { useNavigate } from "react-router-dom";
 
+import ProfileHeader from "../../components/ProfileHeader/ProfileHeader";
+import SettingItem from "../../components/SettingItem/SettingItem";
+import SectionCard from "../../components/SectionCard/SectionCard";
+
 import {
-  RiUser3Fill,
   RiPaletteLine,
   RiNotification3Line,
   RiInformationLine,
   RiHistoryLine,
   RiFireFill,
-  RiArrowRightSLine,
 } from "react-icons/ri";
 
 function Profile() {
+
   const navigate = useNavigate();
 
-  // Nanti diganti dari Authentication
   const user = {
     name: "Guest",
     bio: "Organize your day beautifully.",
@@ -23,130 +25,63 @@ function Profile() {
   };
 
   return (
+
     <div className="profile-page">
 
-      <div className="profile-header">
+      <ProfileHeader user={user} />
 
-        <div className="avatar">
+      <SectionCard title="Activity">
 
-          <RiUser3Fill />
-
-        </div>
-
-        <h2>{user.name}</h2>
-
-        <p>{user.bio}</p>
-
-      </div>
-
-      {/* ACTIVITY */}
-
-      <div className="settings-card">
-
-        <h3>Activity</h3>
-
-        <button
-          className="setting-item"
+        <SettingItem
+          icon={<RiFireFill />}
+          title="Routine Tracker"
+          subtitle="Manage your daily routines"
           onClick={() => navigate("/routine")}
-        >
+        />
 
-          <div className="setting-left">
-
-            <RiFireFill />
-
-            <span>Routine Tracker</span>
-
-          </div>
-
-          <RiArrowRightSLine />
-
-        </button>
-
-        <button
-          className="setting-item"
+        <SettingItem
+          icon={<RiHistoryLine />}
+          title="Activity History"
+          subtitle="View completed activities"
           onClick={() => navigate("/history")}
-        >
+        />
 
-          <div className="setting-left">
+      </SectionCard>
 
-            <RiHistoryLine />
+      <SectionCard title="Preferences">
 
-            <span>Activity History</span>
+        <SettingItem
+          icon={<RiPaletteLine />}
+          title="Appearance"
+          subtitle="Theme and colors"
+        />
 
-          </div>
+        <SettingItem
+          icon={<RiNotification3Line />}
+          title="Notifications"
+          subtitle="Reminder settings"
+        />
 
-          <RiArrowRightSLine />
+      </SectionCard>
 
-        </button>
+      <SectionCard title="About">
 
-      </div>
+        <SettingItem
+          icon={<RiInformationLine />}
+          title="About Planora"
+          subtitle="Version, credits and licenses"
+        />
 
-      {/* PREFERENCES */}
-
-      <div className="settings-card">
-
-        <h3>Preferences</h3>
-
-        <button className="setting-item">
-
-          <div className="setting-left">
-
-            <RiPaletteLine />
-
-            <span>Appearance</span>
-
-          </div>
-
-          <RiArrowRightSLine />
-
-        </button>
-
-        <button className="setting-item">
-
-          <div className="setting-left">
-
-            <RiNotification3Line />
-
-            <span>Notifications</span>
-
-          </div>
-
-          <RiArrowRightSLine />
-
-        </button>
-
-      </div>
-
-      {/* ABOUT */}
-
-      <div className="settings-card">
-
-        <h3>About</h3>
-
-        <button className="setting-item">
-
-          <div className="setting-left">
-
-            <RiInformationLine />
-
-            <span>About Planora</span>
-
-          </div>
-
-          <RiArrowRightSLine />
-
-        </button>
-
-      </div>
+      </SectionCard>
 
       <p className="version">
-
         Planora v1.0.0
-
       </p>
 
     </div>
+
   );
+
 }
 
 export default Profile;
