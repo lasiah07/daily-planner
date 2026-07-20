@@ -1,12 +1,9 @@
-import { useState } from "react";
 import "./Profile.css";
 
 import { useNavigate } from "react-router-dom";
 
 import {
   RiUser3Fill,
-  RiCheckboxCircleFill,
-  RiStickyNoteFill,
   RiPaletteLine,
   RiNotification3Line,
   RiInformationLine,
@@ -18,25 +15,12 @@ import {
 function Profile() {
   const navigate = useNavigate();
 
-  const [tasks] = useState(() => {
-    const saved = localStorage.getItem(
-      "planora_tasks"
-    );
-
-    return saved ? JSON.parse(saved) : [];
-  });
-
-  const [notes] = useState(() => {
-    const saved = localStorage.getItem(
-      "planora_notes"
-    );
-
-    return saved ? JSON.parse(saved) : [];
-  });
-
-  const completedTasks = tasks.filter(
-    (task) => task.completed
-  ).length;
+  // Nanti diganti dari Authentication
+  const user = {
+    name: "Guest",
+    bio: "Organize your day beautifully.",
+    avatar: null,
+  };
 
   return (
     <div className="profile-page">
@@ -44,68 +28,39 @@ function Profile() {
       <div className="profile-header">
 
         <div className="avatar">
+
           <RiUser3Fill />
+
         </div>
 
-        <h2>Lasiah</h2>
+        <h2>{user.name}</h2>
 
-        <p>
-          Organize your day beautifully.
-        </p>
+        <p>{user.bio}</p>
 
       </div>
 
-      <div className="stats-card">
-
-        <h3>Your Statistics</h3>
-
-        <div className="stat-item">
-
-          <div className="stat-left">
-
-            <RiCheckboxCircleFill />
-
-            <span>Total Tasks</span>
-
-          </div>
-
-          <strong>{tasks.length}</strong>
-
-        </div>
-
-        <div className="stat-item">
-
-          <div className="stat-left">
-
-            <RiCheckboxCircleFill />
-
-            <span>Completed</span>
-
-          </div>
-
-          <strong>{completedTasks}</strong>
-
-        </div>
-
-        <div className="stat-item">
-
-          <div className="stat-left">
-
-            <RiStickyNoteFill />
-
-            <span>Total Notes</span>
-
-          </div>
-
-          <strong>{notes.length}</strong>
-
-        </div>
-
-      </div>
+      {/* ACTIVITY */}
 
       <div className="settings-card">
 
-        <h3>Settings</h3>
+        <h3>Activity</h3>
+
+        <button
+          className="setting-item"
+          onClick={() => navigate("/routine")}
+        >
+
+          <div className="setting-left">
+
+            <RiFireFill />
+
+            <span>Routine Tracker</span>
+
+          </div>
+
+          <RiArrowRightSLine />
+
+        </button>
 
         <button
           className="setting-item"
@@ -124,22 +79,13 @@ function Profile() {
 
         </button>
 
-        <button
-          className="setting-item"
-          onClick={() => navigate("/routine")}
-        >
+      </div>
 
-          <div className="setting-left">
+      {/* PREFERENCES */}
 
-            <RiFireFill />
+      <div className="settings-card">
 
-            <span>Routine Tracker</span>
-
-          </div>
-
-          <RiArrowRightSLine />
-
-        </button>
+        <h3>Preferences</h3>
 
         <button className="setting-item">
 
@@ -169,6 +115,14 @@ function Profile() {
 
         </button>
 
+      </div>
+
+      {/* ABOUT */}
+
+      <div className="settings-card">
+
+        <h3>About</h3>
+
         <button className="setting-item">
 
           <div className="setting-left">
@@ -186,7 +140,9 @@ function Profile() {
       </div>
 
       <p className="version">
-        Planora v1.0
+
+        Planora v1.0.0
+
       </p>
 
     </div>
