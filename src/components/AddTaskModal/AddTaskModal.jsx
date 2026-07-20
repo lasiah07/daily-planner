@@ -12,9 +12,9 @@ function AddTaskModal({
   onAddTask,
   editTask,
   defaultDeadline,
+  hideType = false,
 }) {
   const [title, setTitle] = useState("");
-
   const [taskType, setTaskType] =
     useState("task");
 
@@ -38,7 +38,9 @@ function AddTaskModal({
     } else {
       setTitle("");
 
-      setTaskType("task");
+      setTaskType(
+        hideType ? "routine" : "task"
+      );
 
       if (defaultDeadline) {
         setHasDeadline(true);
@@ -48,7 +50,12 @@ function AddTaskModal({
         setDeadline("");
       }
     }
-  }, [editTask, isOpen]);
+  }, [
+    editTask,
+    isOpen,
+    defaultDeadline,
+    hideType,
+  ]);
 
   if (!isOpen) return null;
 
@@ -112,44 +119,46 @@ function AddTaskModal({
 
         </div>
 
-        <div className="form-group">
+        {!hideType && (
+          <div className="form-group">
 
-          <label>Jenis Aktivitas</label>
+            <label>Jenis Aktivitas</label>
 
-          <div className="task-type">
+            <div className="task-type">
 
-            <button
-              type="button"
-              className={
-                taskType === "task"
-                  ? "type-btn active-type"
-                  : "type-btn"
-              }
-              onClick={() =>
-                setTaskType("task")
-              }
-            >
-              One Time Task
-            </button>
+              <button
+                type="button"
+                className={
+                  taskType === "task"
+                    ? "type-btn active-type"
+                    : "type-btn"
+                }
+                onClick={() =>
+                  setTaskType("task")
+                }
+              >
+                One Time Task
+              </button>
 
-            <button
-              type="button"
-              className={
-                taskType === "routine"
-                  ? "type-btn active-type"
-                  : "type-btn"
-              }
-              onClick={() => {
-                setTaskType("routine");
-                setHasDeadline(false);
-              }}
-            >
-              Routine
-            </button>
+              <button
+                type="button"
+                className={
+                  taskType === "routine"
+                    ? "type-btn active-type"
+                    : "type-btn"
+                }
+                onClick={() => {
+                  setTaskType("routine");
+                  setHasDeadline(false);
+                }}
+              >
+                Routine
+              </button>
+
+            </div>
 
           </div>
-
-        </div>
+        )}
 
         {taskType === "task" && (
           <>
@@ -176,7 +185,6 @@ function AddTaskModal({
             </div>
 
             {hasDeadline && (
-
               <div className="form-group">
 
                 <label className="deadline-label">
@@ -195,7 +203,6 @@ function AddTaskModal({
                 />
 
               </div>
-
             )}
           </>
         )}

@@ -214,3 +214,55 @@
   }
 
 }
+
+.routine-list{
+
+  margin-top:28px;
+
+}
+
+.routine-list-title{
+
+  font-size:18px;
+  font-weight:700;
+
+  color:#24324B;
+
+  margin-bottom:14px;
+
+}
+
+.routine-item{
+
+  background:white;
+
+  padding:18px;
+
+  border-radius:18px;
+
+  margin-bottom:14px;
+
+  border:1px solid #E8EEF5;
+
+  box-shadow:
+  0 8px 20px rgba(0,0,0,.04);
+
+}
+
+.routine-item h4{
+
+  font-size:16px;
+
+  color:#24324B;
+
+}
+
+.routine-empty{
+
+  color:#97A4B8;
+
+  text-align:center;
+
+  margin-top:20px;
+
+}
