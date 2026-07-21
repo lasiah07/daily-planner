@@ -1,0 +1,204 @@
+.splash-page {
+  width: 100%;
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 80px 28px 60px;
+
+  background: linear-gradient(
+    180deg,
+    #F7FCFF 0%,
+    #EDF8FF 45%,
+    #E2F3FF 100%
+  );
+
+  animation: fadeIn .8s ease;
+}
+
+@keyframes fadeIn {
+
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+}
+
+.splash-content {
+
+  margin-top: auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.logo-circle {
+
+  width: 110px;
+  height: 110px;
+
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: linear-gradient(
+    180deg,
+    #79D0FF,
+    #57B8F7
+  );
+
+  box-shadow:
+    0 20px 45px rgba(103,198,255,.35);
+
+}
+
+.logo-circle svg {
+
+  color: white;
+
+  font-size: 54px;
+
+}
+
+.logo-title {
+
+  margin-top: 26px;
+
+  font-size: 42px;
+  font-weight: 800;
+
+  color: #2F3A4A;
+
+  letter-spacing: .5px;
+
+}
+
+.logo-subtitle {
+
+  margin-top: 10px;
+
+  color: #7C8A9A;
+
+  font-size: 16px;
+
+  text-align: center;
+
+  line-height: 1.6;
+
+}
+
+.loading-section {
+
+  width: 100%;
+  max-width: 260px;
+
+  margin-top: auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 14px;
+
+}
+
+.loading-bar {
+
+  width: 100%;
+  height: 8px;
+
+  border-radius: 999px;
+
+  background: #DDECF8;
+
+  overflow: hidden;
+
+}
+
+.loading-fill {
+
+  width: 35%;
+
+  height: 100%;
+
+  border-radius: 999px;
+
+  background: linear-gradient(
+    90deg,
+    #79D0FF,
+    #57B8F7
+  );
+
+  animation: loading 2s linear forwards;
+
+}
+
+@keyframes loading {
+
+  from {
+    width: 0%;
+  }
+
+  to {
+    width: 100%;
+  }
+
+}
+
+.loading-section span {
+
+  font-size: 14px;
+
+  color: #7C8A9A;
+
+  letter-spacing: .5px;
+
+}
+
+@media (max-width:480px) {
+
+  .splash-page {
+
+    padding: 70px 24px 50px;
+
+  }
+
+  .logo-circle {
+
+    width: 95px;
+    height: 95px;
+
+  }
+
+  .logo-circle svg {
+
+    font-size: 46px;
+
+  }
+
+  .logo-title {
+
+    font-size: 36px;
+
+  }
+
+  .logo-subtitle {
+
+    font-size: 15px;
+
+  }
+
+}

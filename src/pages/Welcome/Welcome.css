@@ -1,0 +1,247 @@
+.welcome-page {
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  padding: 60px 28px 50px;
+
+  background: linear-gradient(
+    180deg,
+    #F7FCFF 0%,
+    #EDF8FF 45%,
+    #E5F5FF 100%
+  );
+}
+
+.welcome-content {
+  margin-top: auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.welcome-logo {
+
+  width: 100px;
+  height: 100px;
+
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: linear-gradient(
+    180deg,
+    #79D0FF,
+    #58B9F7
+  );
+
+  box-shadow:
+    0 15px 35px rgba(88,185,247,.28);
+
+  margin-bottom: 28px;
+}
+
+.welcome-logo svg{
+
+  font-size:50px;
+
+  color:white;
+
+}
+
+.welcome-content h1{
+
+  font-size:34px;
+
+  color:#2F3A4A;
+
+  font-weight:800;
+
+  text-align:center;
+
+}
+
+.welcome-subtitle{
+
+  margin-top:12px;
+
+  text-align:center;
+
+  font-size:16px;
+
+  color:#7B8897;
+
+  line-height:1.7;
+
+  max-width:290px;
+
+}
+
+.feature-list{
+
+  width:100%;
+
+  margin-top:42px;
+
+  display:flex;
+  flex-direction:column;
+
+  gap:18px;
+
+}
+
+.feature-item{
+
+  display:flex;
+  align-items:center;
+
+  gap:16px;
+
+  background:white;
+
+  border-radius:18px;
+
+  padding:18px 20px;
+
+  box-shadow:
+      0 8px 20px rgba(0,0,0,.05);
+
+}
+
+.feature-item svg{
+
+  font-size:24px;
+
+  color:#67C6FF;
+
+}
+
+.feature-item span{
+
+  font-size:15px;
+
+  color:#2F3A4A;
+
+  font-weight:600;
+
+}
+
+.welcome-footer{
+
+  margin-top:auto;
+
+}
+
+.start-button{
+
+  width:100%;
+
+  height:56px;
+
+  border:none;
+
+  border-radius:18px;
+
+  background:linear-gradient(
+      180deg,
+      #79D0FF,
+      #58B9F7
+  );
+
+  color:white;
+
+  font-size:17px;
+
+  font-weight:700;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  gap:10px;
+
+  cursor:pointer;
+
+  transition:.25s;
+
+}
+
+.start-button:hover{
+
+  transform:translateY(-2px);
+
+}
+
+.signin-text{
+
+  margin-top:24px;
+
+  text-align:center;
+
+  font-size:14px;
+
+  color:#8A97A7;
+
+}
+
+.signin-button{
+
+  border:none;
+
+  background:none;
+
+  color:#58B9F7;
+
+  font-weight:700;
+
+  margin-left:6px;
+
+  cursor:pointer;
+
+}
+
+.signin-button:hover{
+
+  text-decoration:underline;
+
+}
+
+@media(max-width:480px){
+
+  .welcome-page{
+
+    padding:50px 22px 40px;
+
+  }
+
+  .welcome-logo{
+
+    width:88px;
+    height:88px;
+
+  }
+
+  .welcome-logo svg{
+
+    font-size:44px;
+
+  }
+
+  .welcome-content h1{
+
+    font-size:30px;
+
+  }
+
+  .feature-item{
+
+    padding:16px;
+
+  }
+
+}

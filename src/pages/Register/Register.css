@@ -1,0 +1,179 @@
+.register-form {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 22px;
+}
+
+.form-group {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+.form-group label {
+  font-size: 14px;
+
+  font-weight: 700;
+
+  color: #2F3A4A;
+}
+
+.input-wrapper {
+  height: 60px;
+
+  display: flex;
+
+  align-items: center;
+
+  background: white;
+
+  border: 1px solid #E5EDF6;
+
+  border-radius: 20px;
+
+  padding: 0 18px;
+
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .05);
+
+  transition: .25s;
+}
+
+.input-wrapper:focus-within {
+  border-color: #67C6FF;
+
+  box-shadow:
+    0 0 0 4px rgba(103, 198, 255, .15);
+}
+
+.input-icon {
+  font-size: 22px;
+
+  color: #9AA8B8;
+}
+
+.input-wrapper input {
+  flex: 1;
+
+  margin-left: 14px;
+
+  border: none;
+
+  outline: none;
+
+  background: transparent;
+
+  font-size: 15px;
+
+  color: #2F3A4A;
+}
+
+.input-wrapper input::placeholder {
+  color: #B8C4D0;
+}
+
+.password-toggle {
+  border: none;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  color: #9AA8B8;
+
+  font-size: 22px;
+
+  transition: .25s;
+}
+
+.password-toggle:hover {
+  color: #67C6FF;
+}
+
+.register-button {
+  margin-top: 8px;
+
+  height: 58px;
+
+  border: none;
+
+  border-radius: 20px;
+
+  background: linear-gradient(
+    180deg,
+    #7BD3FF,
+    #5BBDF7
+  );
+
+  color: white;
+
+  font-size: 17px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: .25s;
+}
+
+.register-button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 26px rgba(91, 189, 247, .35);
+}
+
+.register-footer {
+  margin-top: 36px;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 6px;
+
+  flex-wrap: wrap;
+
+  color: #7C8A9A;
+
+  font-size: 14px;
+}
+
+.login-link {
+  border: none;
+
+  background: transparent;
+
+  color: #5BBDF7;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: .2s;
+}
+
+.login-link:hover {
+  color: #3DA8E7;
+}
+
+@media (max-width: 480px) {
+
+  .register-button {
+    height: 56px;
+  }
+
+}
