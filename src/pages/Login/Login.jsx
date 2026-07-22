@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 
 import AuthLayout from "../../components/AuthLayout/AuthLayout";
 
+import { loginUser } from "../../services/authService";
+
 import {
   RiMailLine,
   RiLock2Line,
@@ -22,10 +24,56 @@ function Login() {
   const [showPassword, setShowPassword] =
     useState(false);
 
-  const handleLogin = () => {
-    // TODO:
-    // Diganti Firebase Authentication
-    navigate("/home");
+  const [loading, setLoading] =
+    useState(false);
+
+  const handleLogin = async () => {
+    if (!email.trim() || !password) {
+      alert("Lengkapi email dan password.");
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      await loginUser(
+        email,
+        password
+      );
+
+      navigate("/home");
+    } catch (error) {
+      switch (error.code) {
+        case "auth/invalid-credential":
+          alert(
+            "Email atau password salah."
+          );
+          break;
+
+        case "auth/user-not-found":
+          alert(
+            "Akun tidak ditemukan."
+          );
+          break;
+
+        case "auth/wrong-password":
+          alert(
+            "Password salah."
+          );
+          break;
+
+        case "auth/invalid-email":
+          alert(
+            "Format email tidak valid."
+          );
+          break;
+
+        default:
+          alert(error.message);
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -69,7 +117,7 @@ function Login() {
                   ? "text"
                   : "password"
               }
-              placeholder="Enter your password"
+              placeholder="Enter password"
               value={password}
               onChange={(e) =>
                 setPassword(
@@ -95,8 +143,8 @@ function Login() {
         </div>
 
         <button
-          type="button"
           className="forgot-password"
+          type="button"
           onClick={() =>
             navigate("/forgot-password")
           }
@@ -108,8 +156,11 @@ function Login() {
           type="button"
           className="login-button"
           onClick={handleLogin}
+          disabled={loading}
         >
-          Sign In
+          {loading
+            ? "Signing In..."
+            : "Sign In"}
         </button>
 
       </div>

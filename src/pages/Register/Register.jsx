@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 
 import AuthLayout from "../../components/AuthLayout/AuthLayout";
 
+import { registerUser } from "../../services/authService";
+
 import {
   RiUser3Line,
   RiMailLine,
@@ -31,13 +33,13 @@ function Register() {
   const [showConfirmPassword, setShowConfirmPassword] =
     useState(false);
 
-  const handleRegister = () => {
-    // TODO:
-    // Firebase Authentication
+  const [loading, setLoading] =
+    useState(false);
 
+  const handleRegister = async () => {
     if (
-      !name ||
-      !email ||
+      !name.trim() ||
+      !email.trim() ||
       !password ||
       !confirmPassword
     ) {
@@ -50,7 +52,46 @@ function Register() {
       return;
     }
 
-    navigate("/home");
+    try {
+      setLoading(true);
+
+      await registerUser(
+        name,
+        email,
+        password
+      );
+
+      alert(
+        "Akun berhasil dibuat."
+      );
+
+      navigate("/home");
+    } catch (error) {
+      switch (error.code) {
+        case "auth/email-already-in-use":
+          alert(
+            "Email sudah digunakan."
+          );
+          break;
+
+        case "auth/invalid-email":
+          alert(
+            "Format email tidak valid."
+          );
+          break;
+
+        case "auth/weak-password":
+          alert(
+            "Password minimal 6 karakter."
+          );
+          break;
+
+        default:
+          alert(error.message);
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -142,7 +183,9 @@ function Register() {
 
         <div className="form-group">
 
-          <label>Confirm Password</label>
+          <label>
+            Confirm Password
+          </label>
 
           <div className="input-wrapper">
 
@@ -183,8 +226,11 @@ function Register() {
           type="button"
           className="register-button"
           onClick={handleRegister}
+          disabled={loading}
         >
-          Create Account
+          {loading
+            ? "Creating Account..."
+            : "Create Account"}
         </button>
 
       </div>

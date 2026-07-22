@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 
 import AuthLayout from "../../components/AuthLayout/AuthLayout";
 
+import { resetPassword } from "../../services/authService";
+
 import {
   RiMailLine,
 } from "react-icons/ri";
@@ -15,32 +17,60 @@ function ForgotPassword() {
   const [email, setEmail] =
     useState("");
 
-  const handleResetPassword = () => {
-    // TODO:
-    // Firebase Reset Password
+  const [loading, setLoading] =
+    useState(false);
 
-    if (!email.trim()) {
-      alert("Masukkan email terlebih dahulu.");
-      return;
-    }
+  const handleResetPassword =
+    async () => {
+      if (!email.trim()) {
+        alert(
+          "Masukkan email terlebih dahulu."
+        );
+        return;
+      }
 
-    alert(
-      "Link reset password berhasil dikirim."
-    );
+      try {
+        setLoading(true);
 
-    navigate("/login");
-  };
+        await resetPassword(email);
+
+        alert(
+          "Link reset password telah dikirim ke email kamu."
+        );
+
+        navigate("/login");
+      } catch (error) {
+        switch (error.code) {
+          case "auth/user-not-found":
+            alert(
+              "Email belum terdaftar."
+            );
+            break;
+
+          case "auth/invalid-email":
+            alert(
+              "Format email tidak valid."
+            );
+            break;
+
+          default:
+            alert(error.message);
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
 
   return (
     <AuthLayout
       subtitle="Recover your account easily."
     >
-
       <div className="forgot-form">
 
         <p className="forgot-description">
-          Enter your email address and we'll
-          send you a password reset link.
+          Enter your email address and
+          we'll send you a password
+          reset link.
         </p>
 
         <div className="form-group">
@@ -67,8 +97,11 @@ function ForgotPassword() {
         <button
           className="reset-button"
           onClick={handleResetPassword}
+          disabled={loading}
         >
-          Send Reset Link
+          {loading
+            ? "Sending..."
+            : "Send Reset Link"}
         </button>
 
       </div>
